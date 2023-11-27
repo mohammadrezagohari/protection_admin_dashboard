@@ -58,23 +58,6 @@ export function ShowFaq() {
     showFaqs(id);
   }, []);
 
-
-  // const editFaqs = async () => {
-  //   const editResult = await updateFaq(id, {
-  //     question:question,
-  //     description:description,
-  //   }, userToken)
-  //     .then(function (response) {
-  //       console.log(response?.data?.status);
-  //       if(response?.data?.status == true)
-  //       console.log(response?.data?.status);
-  //     })
-  //     .catch(function (err) {
-  //       console.log("error", err);
-  //     });
-
-  //   return editResult;
-  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
   

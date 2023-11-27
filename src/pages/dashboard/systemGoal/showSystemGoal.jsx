@@ -7,14 +7,15 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { getGoal,showGoal } from "@/api/services/goal";
+import { showGoal, updateGoal } from "@/api/services/goal";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
 
 export function ShowSystemGoals() {
   const { userToken } = useContext(AuthContext);
+  const { id } = useParams();
 
   const [loading, setLoading] = useState(true);
   const [titles, setTitles] = useState();
@@ -38,21 +39,52 @@ export function ShowSystemGoals() {
   };
 
 
-  const showSysGoals = async (id) => {
-    const showResult = await showGoal(id, userToken)
-      .then(function (response) {
-        setTitles(response?.title);
-        setDescriptions(response?.description);
+  const showGoals = async () => {
+    const showResult = await showGoal(id)
+      .then((result) => {
+        console.log('result', result)
+        setTitles(result?.data?.title);
+        console.log('queeee',result?.data?.title)
+
+        setDescriptions(result?.data?.description);
+        console.log('dessss',result?.data?.description)
+
       })
-      .catch(function (err) {
-        console.log("error", err);
+      .catch(function (error) {
+        console.log(error);
       });
-    setLoading(false);
     return showResult;
   };
   useEffect(() => {
-    setTimeout((id) => {
-        showSysGoals(id);
+    showGoals(id);
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const editResult = await updateGoal(id, {
+          title:titles,
+          description:descriptions,
+        }, userToken)
+          .then(function (response) {
+            if (response.status == true) {
+              toast.success("  تغییرات با موفقیت افزوده شد !");
+            }
+            console.log(response?.data?.status);
+            if(response?.data?.status == true)
+            console.log(response?.data?.status);
+          })
+          .catch(function (err) {
+            console.log("error", err);
+          });
+    
+        return editResult;
+  
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
     }, 3000);
   }, []);
 
@@ -93,15 +125,15 @@ export function ShowSystemGoals() {
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form
               method="post"
-              // onSubmit={storeCategory}
+              onSubmit={handleSubmit}
               className="m-6 mb-4 flex flex-wrap"
             >
               <div className="w-7/12">
                 <label className="ml-3"> عنوان  </label>
                 <input
                 type="text"
-                  onChange={(e) => setTitles(e)}
-                //   value={titles}
+                  onChange={(e) => setTitles(e.target.value)}
+                  value={titles}
                   className="ml-3"
                   name="name"
                   style={inputStyle}
@@ -110,8 +142,8 @@ export function ShowSystemGoals() {
               <div className="w-7/12">
                 <label className="ml-3"> توضیحات  </label>
                 <textarea
-                  onChange={(e) => setDescriptions(e)}
-                //   value={descriptions}
+                  onChange={(e) => setDescriptions(e.target.value)}
+                  value={descriptions}
                   type="text"
                   className="ml-3"
                   name="name"
