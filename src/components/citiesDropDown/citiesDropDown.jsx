@@ -11,15 +11,18 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
     ["getCitiesCollection", userToken],
     () => getCities(userToken)
   );
-  
-  useEffect(
-    function () {
-      if (!isLoading && !isError) {
-        const slItem = data.find((c) => c.id == selected);
+
+  useEffect(() => {
+    // setTimeout(function () {
+      if (!isLoading) {
+        let slItem = data.find((c) => c.id == selected_id);
+        console.log("selected_id", selected_id);
+        console.log("slItem", slItem);
+
         if (slItem) {
           setSelected({
-            value: slItem.id,
-            label: slItem.name,
+            value: `${slItem.id}`,
+            label: `${slItem.name}`,
           });
         } else {
           const slItem = data[0];
@@ -27,11 +30,13 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
             value: slItem.id,
             label: slItem.name,
           });
+          console.log("cant open to selected");
         }
+
+        console.log("selected after effect", selected);
       }
-    },
-    [data, isLoading, isError]
-  );
+    // }, 5000);
+  }, [ data, isLoading, isError]);
 
   if (isError) {
     return <div>خطا در بارگذاری اطلاعات</div>;
@@ -39,10 +44,16 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
   if (isLoading) {
     return <div>در حال بارگذاری...</div>;
   }
+
+  if (!selected && selected_id) {
+    console.log('selected_id',selected_id)
+    return <div>Loading...</div>;
+  }
   return (
     <div className="relative h-10 w-full min-w-[200px]">
+      {console.log("aaa selected", selected)}
       <Select
-        name="field_id"
+        name="city_id"
         isSearchable={true}
         options={data.map((field) => ({
           value: field.id,
@@ -51,7 +62,7 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
         defaultValue={selected ? selected : null}
         placeholder="شهر مورد نظر را انتخاب کنید"
         onChange={(e) => {
-            setCities(e.value);
+          setCities(e.value);
         }}
       />
     </div>

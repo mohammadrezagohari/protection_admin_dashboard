@@ -75,6 +75,7 @@ export function EditUser() {
 
     useEffect(() => {
         showUserProfileInfo(id);
+
     }, []);
 
     const editUserProfileInfo = async (e) => {
