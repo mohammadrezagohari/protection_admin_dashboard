@@ -9,7 +9,7 @@ import {
 import Select from "react-select";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { showFaq, getFaq ,updateFaq} from "@/api/services/faq";
+import { showFaq ,updateFaq} from "@/api/services/faq";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
 
@@ -38,15 +38,19 @@ export function ShowFaq() {
     padding: "0.5rem",
     borderRadius: "8px",
   };
-  const showFaqs = async (id) => {
+  const showFaqs = async () => {
     const showResult = await showFaq(id)
       .then((result) => {
         console.log('result', result)
         setQuestion(result?.data?.question);
+        console.log('queeee',result?.data?.question)
+
         setDescription(result?.data?.description);
+        console.log('dessss',result?.data?.question)
+
       })
       .catch(function (error) {
-        console.log(error.message);
+        console.log(error);
       });
     return showResult;
   };
@@ -55,39 +59,44 @@ export function ShowFaq() {
   }, []);
 
 
-  const editFaqs = async (id, values) => {
-    console.log("values", values);
-    const editResult = await updateFaq(id, values)
-      .then(function (response) {
-        if (response.data.status == true) {
-          toast.success("تغییرات با موفقیت انجام گرفت");
-        }else {
-               if (response?.success == false) {
-                 toast(
-                  `${
-                  response?.data?.question != undefined ? response?.data?.question : ""
-                   } \n
-                   ${
-                   response?.data?.description != undefined
-                  ? response?.data?.description
-                  : ""
-                  } \n`,
-                  {
-                    duration: 2000,
-                  }
-                      );
-                    }
-                    toast.error("خطایی رخ داده است");
-                  }
-                  console.log(response);
-                })
-                .catch(function (err) {
-                  toast.error("خطا !! مجددا تلاش نمایید");
-                  console.log("error", err);
-                });
-              return editResult;
-            };
-          
+  // const editFaqs = async () => {
+  //   const editResult = await updateFaq(id, {
+  //     question:question,
+  //     description:description,
+  //   }, userToken)
+  //     .then(function (response) {
+  //       console.log(response?.data?.status);
+  //       if(response?.data?.status == true)
+  //       console.log(response?.data?.status);
+  //     })
+  //     .catch(function (err) {
+  //       console.log("error", err);
+  //     });
+
+  //   return editResult;
+  // };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const editResult = await updateFaq(id, {
+          question:question,
+          description:description,
+        }, userToken)
+          .then(function (response) {
+            if (response.status == true) {
+              toast.success("  تغییرات با موفقیت افزوده شد !");
+            }
+            console.log(response?.data?.status);
+            if(response?.data?.status == true)
+            console.log(response?.data?.status);
+          })
+          .catch(function (err) {
+            console.log("error", err);
+          });
+    
+        return editResult;
+  
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -131,19 +140,16 @@ export function ShowFaq() {
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form
-              method="post"
-              onSubmit={(values) => {
-                console.log('values', values)
-                editFaqs(id,values);
-              }}
+            method="post"
+              onSubmit={handleSubmit}
               className="m-6 mt-0 mb-4  grid grid-cols-2 gap-x-6"
             >
              <div className="w-full">
                 <label className="ml-3">  عنوان سوال </label>
                 <input
                   onChange={(e) => {
-                    setQuestion(e.currentTarget.value);
-                    console.log(e.currentTarget.value);
+                    setQuestion(e.target.value);
+                    console.log(e.target.value);
                   }}
                   value={question}
                   type="text"

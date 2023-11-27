@@ -43,7 +43,7 @@ export const showVideo = async (id, userToken) => {
   if (!response.status) {
     return null;
   }
-  return response?.data;
+  return response?.data; 
 };
 
 export const updateVideo = async (id, values, userToken) => {

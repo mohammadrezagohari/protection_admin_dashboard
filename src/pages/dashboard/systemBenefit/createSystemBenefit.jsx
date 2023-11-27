@@ -19,11 +19,19 @@ export function CreateSystemBenefit() {
 
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState();
-  const [is_active, setIs_active] = useState();
+  // const [is_active, setIs_active] = useState({
+  //   value:false,
+  //   label:'غیرفعال',
+  // });
   const [selected, setSelected] = useState(null);
 
+
   const handleChange = (selectedOption) => {
-    setIs_active(selectedOption.value);
+    setIs_active(selectedOption.value)
+    // setIs_active({...is_active,value:selectedOption.value});
+    // console.log(is_active.value);
+    // setIs_active({...is_active,label:selectedOption.label});
+    // console.log(is_active.label);
   };
 
   const inputStyle = {
@@ -137,7 +145,7 @@ export function CreateSystemBenefit() {
                   className="mt-2 w-full md:w-7/12 lg:w-7/12"
                   onChange={handleChange}
                   autoFocus={true}
-                  // value={is_active}
+                  value={is_active}
                   options={[
                     {
                       value: true,
