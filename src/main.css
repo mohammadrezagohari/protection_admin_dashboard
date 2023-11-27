@@ -1,0 +1,35 @@
+p,
+label,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Vazir";
+}
+
+.relative.w-full.min-w-\[200px\].h-10 {
+    margin-top: 1em;
+}
+th{
+    text-align: center;
+}
+body {
+    direction: rtl;
+}
+
+tr td.py-3.px-5,
+tr td.py-3.px-5 div {
+    text-align: center;
+    justify-content: center;
+}
+
+.br0 {
+    border-radius: 0 !important;
+}
+
+.psss {
+    height: 100px;
+}

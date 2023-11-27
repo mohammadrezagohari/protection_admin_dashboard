@@ -1,0 +1,19 @@
+form.dragover{
+    border-style: solid;
+    font-size: 2rem;
+    color:#c8c9dd;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.34);
+}
+.image:nth-child(4n){
+  margin-left: 0;  
+}
+
+
+
+
+
+
+
+
+
