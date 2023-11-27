@@ -30,7 +30,7 @@ function Workspace() {
   
 
   const getDatas = async () => {
-    const result = await getWorkspace(userToken)
+    const result = await getWorkspace(20,userToken)
       .then(function (result) {
         console.log("response", result?.data);
         setWorkspace(result?.data);
@@ -114,7 +114,7 @@ function Workspace() {
               <table className="w-full min-w-[640px] table-auto text-right">
                 <thead>
                   <tr>
-                    {["#"," نام شهر ",'ID', "تنظیمات", ].map((el) => (
+                    {["#","محل خدمت",'شهر', "عملیات", ].map((el) => (
                       <th
                         key={el}
                         className="place-items-center border-b 	 border-blue-gray-50 py-3 px-5 "
@@ -151,7 +151,7 @@ function Workspace() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
-                          { ` ${wspc.city_id}` }
+                          { ` ${wspc?.city?.name}` }
                           </Typography>
                         </td>
                         <td className={className}>
