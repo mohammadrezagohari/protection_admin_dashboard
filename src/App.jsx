@@ -45,6 +45,7 @@ import CustomMessage from "./pages/dashboard/customMessage/customMessage";
 import CreateCustomMessage from "./pages/dashboard/customMessage/createCustomMessage";
 import Notif from "./pages/dashboard/notification/notification";
 import CreateNotif from "./pages/dashboard/notification/createNotif";
+import ShowWorkspace from "./pages/dashboard/workspace/showWorkspace";
 
 function App() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -142,6 +143,8 @@ function App() {
 
           <Route path="/dashboard/workspace" element={<Workspace />} />
           <Route path="/dashboard/workspace/create" element={<CreateWorkspace />} />
+          <Route path="/dashboard/workspace/show/:id" element={<ShowWorkspace />}/>
+
 
 
           <Route path="/dashboard/custom-message" element={<CustomMessage />} />

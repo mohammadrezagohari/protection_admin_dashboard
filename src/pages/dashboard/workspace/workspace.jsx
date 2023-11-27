@@ -30,7 +30,7 @@ function Workspace() {
   
 
   const getDatas = async () => {
-    const result = await getWorkspace(userToken)
+    const result = await getWorkspace(50,userToken)
       .then(function (result) {
         console.log("response", result?.data);
         setWorkspace(result?.data);
@@ -151,12 +151,12 @@ function Workspace() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
-                          { ` ${wspc.city_id}` }
+                          { ` ${wspc.city.name}` }
                           </Typography>
                         </td>
                         <td className={className}>
                           <Link
-                            // to={`/dashboard/workspace/show/${wspc.id}`}
+                            to={`/dashboard/workspace/show/${wspc.id}`}
                             style={linkStyle}
                           >
                             اصلاح
