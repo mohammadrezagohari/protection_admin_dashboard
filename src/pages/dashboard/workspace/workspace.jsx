@@ -32,7 +32,7 @@ function Workspace() {
   const getDatas = async () => {
     const result = await getWorkspace(20,userToken)
       .then(function (result) {
-        console.log("responsessssssss", result?.data?.data);
+        console.log("responsessssssss", result?.data);
         setWorkspace(result?.data);
       })
       .catch(function (err) {
@@ -43,9 +43,9 @@ function Workspace() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    // setTimeout(() => {
         getDatas();
-    }, 3000);
+    // }, 3000);
   }, []);
 
   const linkStyle = {
@@ -57,13 +57,14 @@ function Workspace() {
   };
   
   const deleteWorkspaces = async (id) => {
+    console.log('workspace',workspace);
     const deleteResult = await deleteWorkspace(id, userToken)
       .then(function (response) {
         console.log("status res",response.status);
         if (response.status) {
           toast.success("حذف با موفقیت انجام شد !");
-          console.log("w",workspace?.data)
-          setWorkspace(workspace.filter((wr) => wr.id !== id));
+          getDatas();
+          // setWorkspace(workspace.filter((wr) => wr.id !== id));
         } else {
           toast.error("خطا !! مجددا تلاش نمایید");
         }

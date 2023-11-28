@@ -41,7 +41,7 @@ export function CreateWorkspace() {
     e.preventDefault();
     const createResult = await createWorkspace(
       {
-        name: title,
+        name: name,
         city_id: cities,
       },
       userToken
@@ -133,7 +133,7 @@ export function CreateWorkspace() {
                   id="cities"
                   cities={cities}
                   setCities={setCities}
-                  selected_id={cities.name}
+                  selected_id={cities}
                 />
               </div>
               <div className="col-span-2 mt-4 w-6/12 mb-44">
