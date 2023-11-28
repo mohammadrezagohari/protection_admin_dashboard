@@ -5,7 +5,7 @@ import { AuthContext } from "@/gard/context/AuthContext";
 import { getCities } from "@/api/services/cities";
 
 const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState(null);
   const { userToken } = useContext(AuthContext);
   const { data, isLoading, isError } = useQuery(
     ["getCitiesCollection", userToken],
@@ -13,35 +13,30 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
   );
 
   useEffect(() => {
-    if (!isLoading) {
-      console.log("selected_id", selected_id);
-      let slItem = data.find((c) => c.id == selected_id);
-      console.log("slItem", slItem);
-      console.log("id2",  data.find((c) => c.id == selected_id).id);
-      console.log("name2",  data.find((c) => c.id == selected_id).name);
-      setSelected({
-        value: data.find((c) => c.id == selected_id).id,
-        label: data.find((c) => c.id == selected_id).name,
-      });
-      if (slItem != null) {
-        console.log('salam');
-        console.log("id3",slItem.id);
-        console.log("id5",slItem.name);
-        setSelected({
-          value: slItem.id,
-          label: slItem.name,
-        });
-        console.log("cant open to selected",selected);
-      } else {
-        const slItem = data[0];
-        setSelected({
-          value: slItem.id,
-          label: slItem.name,
-        });
-        console.log("cant open to selected",selected);
+    // setTimeout(function () {
+      if (!isLoading) {
+        let slItem = data.find((c) => c.id == selected_id);
+        console.log("selected_id", selected_id);
+        console.log("slItem", slItem);
+
+        if (slItem) {
+          setSelected({
+            value: `${slItem.id}`,
+            label: `${slItem.name}`,
+          });
+        } else {
+          const slItem = data[0];
+          setSelected({
+            value: slItem.id,
+            label: slItem.name,
+          });
+          console.log("cant open to selected");
+        }
+
+        console.log("selected after effect", selected);
       }
-    }
-  }, [data, isLoading, isError]);
+    // }, 5000);
+  }, [ data, isLoading, isError]);
 
   if (isError) {
     return <div>خطا در بارگذاری اطلاعات</div>;
@@ -50,10 +45,15 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
     return <div>در حال بارگذاری...</div>;
   }
 
+  if (!selected && selected_id) {
+    console.log('selected_id',selected_id)
+    return <div>Loading...</div>;
+  }
   return (
     <div className="relative h-10 w-full min-w-[200px]">
+      {console.log("aaa selected", selected)}
       <Select
-        name="field_id"
+        name="city_id"
         isSearchable={true}
         options={data.map((field) => ({
           value: field.id,

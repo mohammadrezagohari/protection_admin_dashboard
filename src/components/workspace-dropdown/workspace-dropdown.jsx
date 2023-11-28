@@ -55,6 +55,9 @@ const WorkspaceDropdown = ({
       }
     },
     [city_id]
+
+   
+
   );
 
   if (loading && collection.length <= 0) {
