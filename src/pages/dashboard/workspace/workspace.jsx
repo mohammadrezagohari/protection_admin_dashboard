@@ -30,7 +30,7 @@ function Workspace() {
   
 
   const getDatas = async () => {
-    const result = await getWorkspace(50,userToken)
+    const result = await getWorkspace(20,userToken)
       .then(function (result) {
         console.log("responsessssssss", result?.data?.data);
         setWorkspace(result?.data);

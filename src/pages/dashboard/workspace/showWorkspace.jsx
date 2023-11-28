@@ -7,16 +7,16 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
-import { createWorkspace } from "@/api/services/workspace";
+import { updateWorkspace, showWorkspace } from "@/api/services/workspace";
 import CitiesDropdown from "@/components/citiesDropDown/citiesDropDown";
 
-export function CreateWorkspace() {
+export function ShowWorkspace() {
   const { userToken } = useContext(AuthContext);
-
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState(null);
   const [cities, setCities] = useState(null);
@@ -37,47 +37,47 @@ export function CreateWorkspace() {
     borderRadius: "8px",
   };
 
-  const storeWorkspace = async (e) => {
-    e.preventDefault();
-    const createResult = await createWorkspace(
+  const showWorkspaces = async () => {
+    const showResult = await showWorkspace(id, userToken)
+      .then((result) => {
+        setName(result?.data?.name);
+        setCities(result?.data?.city?.id);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    return showResult;
+  };
+  useEffect(() => {
+    showWorkspaces(id);
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const editResult = await updateWorkspace(
+      id,
       {
-        name: title,
+        name: name,
         city_id: cities,
       },
       userToken
     )
       .then(function (response) {
-        console.log("dataresult", response);
-        if (response?.data?.status) {
-          toast.success("محل خدمت با موفقیت افز,ده شد!");
-        } else {
-          if (response?.data?.success == false) {
-            toast(
-              `${response?.data?.data?.name != undefined ? response?.data?.data?.name : ""} \n
-                  ${
-                    response?.data?.data?.city_id != undefined ? response?.data?.data?.city_id : ""
-                  } \n `,
-              {
-                duration: 2000,
-              }
-            );
-          }
-          toast.error("خطایی رخ داده است");
+        if (response.status == true) {
+          toast.success("تغییرات با موفقیت افزوده شد !");
         }
-        console.log(response);
+        console.log(response?.data);
+        if (response?.data?.status == true) console.log(response?.data?.status);
       })
-      .catch(function (error) {
-        toast.error("خطا !! مجددا تلاش نمایید");
-        console.log("error :", error);
+      .catch(function (err) {
+        console.log("error", err);
       });
 
-    return createResult;
+    return editResult;
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+
   return (
     <>
       {loading ? (
@@ -112,13 +112,13 @@ export function CreateWorkspace() {
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form
               method="post"
-              onSubmit={storeWorkspace}
+              onSubmit={handleSubmit}
               className="m-6 mb-4 flex flex-wrap"
             >
               <div className="w-7/12">
                 <label className="ml-3"> نام محل خدمت</label>
                 <input
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setName(e.currentTarget.value)}
                   value={name}
                   type="text"
                   className="ml-3"
@@ -129,14 +129,15 @@ export function CreateWorkspace() {
 
               <div className="mt-4 w-7/12">
                 <label htmlFor="cities">شهر</label>
+
                 <CitiesDropdown
                   id="cities"
                   cities={cities}
                   setCities={setCities}
-                  selected_id={cities.name}
+                  selected_id={cities}
                 />
               </div>
-              <div className="col-span-2 mt-4 w-6/12 mb-44">
+              <div className="col-span-2 mt-4 mb-44 w-6/12">
                 <Button type="submit">ذخیره</Button>
               </div>
             </form>
@@ -147,4 +148,4 @@ export function CreateWorkspace() {
   );
 }
 
-export default CreateWorkspace;
+export default ShowWorkspace;
