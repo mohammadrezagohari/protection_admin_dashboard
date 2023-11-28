@@ -17,25 +17,31 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
       console.log("selected_id", selected_id);
       let slItem = data.find((c) => c.id == selected_id);
       console.log("slItem", slItem);
+      console.log("id2",  data.find((c) => c.id == selected_id).id);
+      console.log("name2",  data.find((c) => c.id == selected_id).name);
       setSelected({
         value: data.find((c) => c.id == selected_id).id,
         label: data.find((c) => c.id == selected_id).name,
       });
-      // if (slItem) {
-      //   setSelected({
-      //     value: slItem.id,
-      //     label: slItem.name,
-      //   });
-      // } else {
-      //   const slItem = data[0];
-      //   setSelected({
-      //     value: slItem.id,
-      //     label: slItem.name,
-      //   });
-      //   console.log("cant open to selected");
-      // }
+      if (slItem != null) {
+        console.log('salam');
+        console.log("id3",slItem.id);
+        console.log("id5",slItem.name);
+        setSelected({
+          value: slItem.id,
+          label: slItem.name,
+        });
+        console.log("cant open to selected",selected);
+      } else {
+        const slItem = data[0];
+        setSelected({
+          value: slItem.id,
+          label: slItem.name,
+        });
+        console.log("cant open to selected",selected);
+      }
     }
-  }, [selected_id]);
+  }, [data, isLoading, isError]);
 
   if (isError) {
     return <div>خطا در بارگذاری اطلاعات</div>;
@@ -53,7 +59,9 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
           value: field.id,
           label: field.name,
         }))}
-        defaultValue={selected ? selected : null}
+        defaultValue={
+          selected ? selected : null
+        }
         placeholder="شهر مورد نظر را انتخاب کنید"
         onChange={(e) => {
           setCities(e.value);
