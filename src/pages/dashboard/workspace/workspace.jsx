@@ -30,9 +30,9 @@ function Workspace() {
   
 
   const getDatas = async () => {
-    const result = await getWorkspace(userToken)
+    const result = await getWorkspace(50,userToken)
       .then(function (result) {
-        console.log("response", result?.data);
+        console.log("responsessssssss", result?.data?.data);
         setWorkspace(result?.data);
       })
       .catch(function (err) {
@@ -59,14 +59,17 @@ function Workspace() {
   const deleteWorkspaces = async (id) => {
     const deleteResult = await deleteWorkspace(id, userToken)
       .then(function (response) {
+        console.log("status res",response.status);
         if (response.status) {
           toast.success("حذف با موفقیت انجام شد !");
-          setWorkspace(workspace.filter((wspc) => wspc.id !== id));
+          console.log("w",workspace?.data)
+          setWorkspace(workspace.filter((wr) => wr.id !== id));
         } else {
           toast.error("خطا !! مجددا تلاش نمایید");
         }
       })
       .catch(function (err) {
+        console.log("w2222",workspace.data)
         toast.error("خطا !! مجددا تلاش نمایید");
         console.log("error", err);
       });
@@ -114,7 +117,7 @@ function Workspace() {
               <table className="w-full min-w-[640px] table-auto text-right">
                 <thead>
                   <tr>
-                    {["#"," نام شهر ",'ID', "تنظیمات", ].map((el) => (
+                    {["#","محل خدمت",'شهر', "عملیات", ].map((el) => (
                       <th
                         key={el}
                         className="place-items-center border-b 	 border-blue-gray-50 py-3 px-5 "
@@ -146,17 +149,17 @@ function Workspace() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            { ` ${wspc.name}` }
+                          {wspc?.name}
                           </Typography>
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
-                          { ` ${wspc.city?.name}` }
+                          {wspc?.city?.name}
                           </Typography>
                         </td>
                         <td className={className}>
                           <Link
-                            // to={`/dashboard/workspace/show/${wspc.id}`}
+                            to={`/dashboard/workspace/show/${wspc?.id}`}
                             style={linkStyle}
                           >
                             اصلاح
