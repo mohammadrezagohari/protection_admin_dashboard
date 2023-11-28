@@ -41,7 +41,7 @@ export function CreateWorkspace() {
     e.preventDefault();
     const createResult = await createWorkspace(
       {
-        name: title,
+        name: name,
         city_id: cities,
       },
       userToken
@@ -49,7 +49,7 @@ export function CreateWorkspace() {
       .then(function (response) {
         console.log("dataresult", response);
         if (response?.data?.status) {
-          toast.success("محل خدمت با موفقیت افز,ده شد!");
+          toast.success("محل خدمت با موفقیت افزوده شد!");
         } else {
           if (response?.data?.success == false) {
             toast(
@@ -133,7 +133,7 @@ export function CreateWorkspace() {
                   id="cities"
                   cities={cities}
                   setCities={setCities}
-                  selected_id={cities.name}
+                  selected_id={cities}
                 />
               </div>
               <div className="col-span-2 mt-4 w-6/12 mb-44">

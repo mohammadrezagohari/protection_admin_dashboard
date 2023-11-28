@@ -24,6 +24,8 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
             value: `${slItem.id}`,
             label: `${slItem.name}`,
           });
+        console.log("selected after effect", selected);
+
         } else {
           const slItem = data[0];
           setSelected({

@@ -65,6 +65,7 @@ export function ShowWorkspace() {
       userToken
     )
       .then(function (response) {
+        console.log("res", response.status);
         if (response.status == true) {
           toast.success("تغییرات با موفقیت افزوده شد !");
         }
@@ -118,7 +119,7 @@ export function ShowWorkspace() {
               <div className="w-7/12">
                 <label className="ml-3"> نام محل خدمت</label>
                 <input
-                  onChange={(e) => setName(e.currentTarget.value)}
+                  onChange={(e) => setName(e.target.value)}
                   value={name}
                   type="text"
                   className="ml-3"
