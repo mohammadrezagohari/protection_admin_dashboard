@@ -151,7 +151,7 @@ function Workspace() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
-                          { ` ${wspc.city_id}` }
+                          { ` ${wspc.city?.name}` }
                           </Typography>
                         </td>
                         <td className={className}>
@@ -162,7 +162,7 @@ function Workspace() {
                             اصلاح
                           </Link>
                           <Button
-                            onClick={() => deleteWorkspaces(wspc.id)}
+                            onClick={() => deleteWorkspaces(wspc?.id)}
                             className="bg-red-700 text-white hover:bg-red-800 focus:outline-none"
                           >
                             حذف
