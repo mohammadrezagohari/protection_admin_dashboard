@@ -46,6 +46,7 @@ import CreateCustomMessage from "./pages/dashboard/customMessage/createCustomMes
 import Notif from "./pages/dashboard/notification/notification";
 import CreateNotif from "./pages/dashboard/notification/createNotif";
 import ShowWorkspace from "./pages/dashboard/workspace/showWorkspace";
+import ShowVideo from "./pages/dashboard/video/showVideo";
 
 function App() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -141,6 +142,8 @@ function App() {
               path="/dashboard/video/create"
               element={<CreateVideo />}
             />
+            <Route path="/dashboard/video/show/:id" element={<ShowVideo />}/>
+
 
           <Route path="/dashboard/workspace" element={<Workspace />} />
           <Route path="/dashboard/workspace/create" element={<CreateWorkspace />} />
