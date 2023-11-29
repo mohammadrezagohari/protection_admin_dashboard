@@ -110,6 +110,12 @@ export const routes = [
         element: <SystemGoal />,
       },
       {
+        icon: <BellIcon {...icon} />,
+        name: "اطلاعات بیماران",
+        path: "/patient",
+        element: <PatientContent />,
+      },
+      {
         icon:<BellIcon {...icon} />,
         name: "ویدئوهای آموزشی ",
         path: "/video",

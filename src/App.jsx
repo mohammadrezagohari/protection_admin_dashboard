@@ -155,6 +155,10 @@ function App() {
           <Route path="/dashboard/notification/create" element={<CreateNotif />} />
           <Route path="/" element={<Home />} />
 
+
+          <Route path="/dashboard/patient" element={<PatientContent />} />
+
+
           </Routes>
         </Dashboard>
       </>

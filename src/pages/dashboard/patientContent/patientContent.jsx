@@ -22,6 +22,7 @@ import {
 } from "@/api/services/category";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
+import { getPatient,deletePatient } from "@/api/services/patient";
 
 function PatientContent() {
   const { userToken } = useContext(AuthContext);
@@ -32,11 +33,13 @@ function PatientContent() {
   const [imagePreview, setImagePreview] = useState();
   const navigate = useNavigate();
 
+  const [patients,setPatients] = useState(null);
+
   const getDatas = async () => {
-    const result = await getCategorysList()
+    const result = await getPatient()
       .then(function (response) {
         console.log("response", response);
-        setCategories(response?.data);
+        setPatients(response?.data);
       })
       .catch(function (err) {
         console.log("error", err);
@@ -70,12 +73,12 @@ function PatientContent() {
     setImagePreview(file_url);
     setIcon(file_url);
   };
-  const deleteCategoryItem = async (id) => {
-    const deleteResult = await deleteCategory(id, userToken)
+  const deletePatients = async (id) => {
+    const deleteResult = await deletePatient(id, userToken)
       .then(function (response) {
         if (response.status) {
           toast.success("حذف با موفقیت انجام شد !");
-          setCategories(categories.filter((catgry) => catgry.id !== id));
+          setPatients(patients.filter((patient) => patient.id !== id));
         } else {
           toast.error("خطا !! مجددا تلاش نمایید");
         }
@@ -105,14 +108,14 @@ function PatientContent() {
           className="mb-8 mt-3 flex justify-between p-6"
         >
           <Typography variant="h6" color="white">
-              محتوای ارسال شده به بیماران   
+              اطلاعات بیماران       
           </Typography>
           <Link
             to={`/dashboard/patientcontent/create`}
             className="mr-3"
             style={linkStyle}
           >
-              ارسال محتوا
+               بیمار جدید
           </Link>
         </CardHeader>
 
@@ -131,18 +134,18 @@ function PatientContent() {
           </div>
         ) : (
           <>
-            <CardBody className="min-h-screen  overflow-x-scroll px-0 pt-0 pb-2">
-              <table className="w-full min-w-[640px] table-auto text-right">
+            <CardBody className="min-h-max overflow-x-scroll  px-0 pt-0 pb-2">
+              <table className="w-full min-w-max table-auto  overflow-x-scroll text-right">
                 <thead>
                   <tr>
-                    {["#", "عنوان محتوا","  شماره همراه بیمار ", "تنظیمات", ].map((el) => (
+                    {["#", "نام","نام خانوادگی","کدملی","  شماره همراه بیمار ","نام بخش","تاریخ پذیرش","تشخیص","بیمارستان","کد بیمار","تنظیمات", ].map((el) => (
                       <th
                         key={el}
                         className="place-items-center border-b 	 border-blue-gray-50 py-3 px-5 "
                       >
                         <Typography
                           variant="small"
-                          className="text-[11px] font-bold uppercase text-blue-gray-400"
+                          className="text-[11px] font-bold uppercase text-blue-gray-400 w-20"
                         >
                           {el}
                         </Typography>
@@ -150,10 +153,10 @@ function PatientContent() {
                     ))}
                   </tr>
                 </thead>
-                <tbody>
-                  {categories?.map((catgry, key) => {
+                <tbody className="">
+                  {patients?.map((patient, key) => {
                     const className = `py-3 px-5 ${
-                      key === categories.length - 1
+                      key === patients.length - 1
                         ? ""
                         : "border-b border-blue-gray-50"
                     }`;
@@ -161,30 +164,65 @@ function PatientContent() {
                     return (
                       <tr key={key}>
                         <td className={className}>
-                          <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-4 ">
                             {" "}
-                            {catgry?.id}
+                            {patient?.id}
                           </div>
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {catgry?.name}
+                            {patient?.first_name}
                           </Typography>
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {icon}
+                            {patient.last_name}
+                          </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {patient?.national_code}
+                          </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {patient?.phone}
+                          </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {patient?.section_title}
+                          </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {patient?.recep_date}
+                          </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {patient?.diagnose}
+                          </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {patient?.hospital_title}
+                          </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {patient?.patient_code}
                           </Typography>
                         </td>
                         <td className={className}>
                           <Link
-                            to={`/dashboard/category/show/${catgry.id}`}
+                            to={`/dashboard/patient/show/${patient.id}`}
                             style={linkStyle}
                           >
                             اصلاح
                           </Link>
                           <Button
-                            onClick={() => deleteCategoryItem(catgry.id)}
+                            onClick={() => deletePatients(patient.id)}
                             className="bg-red-700 text-white hover:bg-red-800 focus:outline-none"
                           >
                             حذف
@@ -195,7 +233,7 @@ function PatientContent() {
                   })}
                 </tbody>
               </table>
-              {categories.length == 0 ? (
+              {patients.length == 0 ? (
                 <>
                   <div className="flex h-[80vh] w-full items-center justify-center">
                     <p className="">آیتمی وجود ندارد :(</p>

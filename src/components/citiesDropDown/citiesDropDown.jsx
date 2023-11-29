@@ -31,7 +31,7 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
             label: slItem.name,
           });
           console.log("cant open to selected");
-        }
+        } 
 
         console.log("selected after effect", selected);
       }

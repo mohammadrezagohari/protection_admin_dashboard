@@ -19,10 +19,7 @@ export function CreateSystemBenefit() {
 
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState();
-  // const [is_active, setIs_active] = useState({
-  //   value:false,
-  //   label:'غیرفعال',
-  // });
+  const [is_active, setIs_active] = useState(null);
   const [selected, setSelected] = useState(null);
 
 
