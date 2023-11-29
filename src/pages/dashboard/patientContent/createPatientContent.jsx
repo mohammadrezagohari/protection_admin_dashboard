@@ -138,7 +138,7 @@ export function CreatePatientContent() {
         <Card>
           <div className="py-5">
             <Link
-              to={`/dashboard/patientcontent`}
+              to={`/dashboard/patient`}
               className="mr-3"
               style={linkStyle}
             >

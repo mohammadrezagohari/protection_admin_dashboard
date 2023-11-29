@@ -81,13 +81,14 @@ function App() {
             <Route path="/dashboard/articles/create" element={<CreateArticle />} />
 
             <Route
-              path="/dashboard/patientcontent"
+              path="/dashboard/patient"
               element={<PatientContent />}
             />
             <Route
-              path="/dashboard/patientcontent/create"
+              path="/dashboard/patient/create"
               element={<CreatePatientContent />}
             />
+           
 
             <Route path="/dashboard/systemgoal" element={<SystemGoal />} />
             <Route
@@ -155,8 +156,6 @@ function App() {
           <Route path="/dashboard/notification/create" element={<CreateNotif />} />
           <Route path="/" element={<Home />} />
 
-
-          <Route path="/dashboard/patient" element={<PatientContent />} />
 
 
           </Routes>
