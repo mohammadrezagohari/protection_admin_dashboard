@@ -61,7 +61,7 @@ export const showPoster = async (id,userToken) => {
 
 export const updatePoster = async (id, values, userToken) => {
   auth_header_files.Authorization = `Bearer ${userToken}`;
-  const response = await apiClient.patch(
+  const response = await apiClient.post(
     `poster/update/${id}`,
     {
       poster: values.poster,

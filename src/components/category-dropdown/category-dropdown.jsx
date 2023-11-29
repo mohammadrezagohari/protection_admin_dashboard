@@ -9,27 +9,27 @@ const CategoryDropdown = ({ category, setCategory, selected_id = null }) => {
   const [selected, setSelected] = useState(null);
   const { userToken } = useContext(AuthContext);
   const { data, isLoading, isError } = useQuery(
-    ["getCategoryCollection", userToken],
+    ["getCategoryCollection", userToken], 
     () => getCategory("50",userToken)
   );
   useEffect(
     function () {
-      if (!isLoading && !isError) {
+      if (!isLoading ) {
         const slItem = data?.data.find((c) => c.id == selected_id);
         console.log('find item ',slItem);
         if (slItem) {
           setSelected({
+            value: `${slItem.id}`,
+            label: `${slItem.name}`,
+          });
+        } 
+        else {
+          const slItem = data[0];
+          setSelected({
             value: slItem.id,
             label: slItem.name,
           });
-        } 
-        // else {
-        //   const slItem = data?.data[0];
-        //   setSelected({
-        //     value: slItem.id,
-        //     label: slItem.name,
-        //   });
-        // }
+        }
       }
     },
     [data, isLoading, isError]
