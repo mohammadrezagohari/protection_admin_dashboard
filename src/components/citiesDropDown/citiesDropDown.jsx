@@ -16,9 +16,6 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
     // setTimeout(function () {
       if (!isLoading) {
         let slItem = data.find((c) => c.id == selected_id);
-        console.log("selected_id", selected_id);
-        console.log("slItem", slItem);
-
         if (slItem) {
           setSelected({
             value: `${slItem.id}`,
@@ -30,10 +27,7 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
             value: slItem.id,
             label: slItem.name,
           });
-          console.log("cant open to selected");
         }
-
-        console.log("selected after effect", selected);
       }
     // }, 5000);
   }, [ data, isLoading, isError]);
@@ -45,13 +39,11 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
     return <div>در حال بارگذاری...</div>;
   }
 
-  if (!selected && selected_id) {
-    console.log('selected_id',selected_id)
+  if (!selected ) {
     return <div>Loading...</div>;
   }
   return (
     <div className="relative h-10 w-full min-w-[200px]">
-      {console.log("aaa selected", selected)}
       <Select
         name="city_id"
         isSearchable={true}

@@ -48,7 +48,7 @@ export const showVideo = async (id, userToken) => {
 
 export const updateVideo = async (id, values, userToken) => {
   auth_header_files.Authorization = `Bearer ${userToken}`;
-  const response = await apiClient.patch(
+  const response = await apiClient.post(
     `video/update/${id}`,
     {
       file_name: values.file_name,

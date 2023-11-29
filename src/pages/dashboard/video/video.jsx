@@ -13,7 +13,7 @@ import {
   Alert,
 } from "@material-tailwind/react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate ,useParams} from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
@@ -164,7 +164,7 @@ function Video() {
                         </td> */}
                         <td className={className}>
                           <Link
-                            // to={`/dashboard/video/show/${video.id}`}
+                            to={`/dashboard/video/show/${video.id}`}
                             style={linkStyle}
                           >
                             اصلاح

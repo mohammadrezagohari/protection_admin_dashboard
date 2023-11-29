@@ -62,7 +62,7 @@ export const routes = [
 
       {
         icon: <BellIcon {...icon} />,
-        name: "آموزش های جدید",
+        name: "مدیریت آموزش ها",
         path: "/tutorials",
         element: <Tutorials />,
       },
@@ -108,6 +108,12 @@ export const routes = [
         name: "  اهداف سامانه آموزش به بیمار",
         path: "/systemgoal",
         element: <SystemGoal />,
+      },
+      {
+        icon: <BellIcon {...icon} />,
+        name: "اطلاعات بیماران",
+        path: "/patient",
+        element: <PatientContent />,
       },
       {
         icon:<BellIcon {...icon} />,
