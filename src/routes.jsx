@@ -62,7 +62,7 @@ export const routes = [
 
       {
         icon: <BellIcon {...icon} />,
-        name: "آموزش های جدید",
+        name: "مدیریت آموزش ها",
         path: "/tutorials",
         element: <Tutorials />,
       },
