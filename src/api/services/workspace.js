@@ -65,10 +65,10 @@ export const showWorkspace = async (id, userToken) => {
 
 export const updateWorkspace = async (id, values, userToken) => {
   auth_header.Authorization = `Bearer ${userToken}`;
-  const response = await apiClient.patch(
+  const response = await apiClient.post(
     `workspace/update/${id}`,
     {
-      name: values.title,
+      name: values.name,
       city_id: values.city_id,
     },
     {

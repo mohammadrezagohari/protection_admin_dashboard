@@ -32,7 +32,7 @@ function Workspace() {
   const getDatas = async () => {
     const result = await getWorkspace(20,userToken)
       .then(function (result) {
-        console.log("response", result?.data);
+        console.log("responsessssssss", result?.data);
         setWorkspace(result?.data);
       })
       .catch(function (err) {
@@ -43,9 +43,9 @@ function Workspace() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    // setTimeout(() => {
         getDatas();
-    }, 3000);
+    // }, 3000);
   }, []);
 
   const linkStyle = {
@@ -57,16 +57,20 @@ function Workspace() {
   };
   
   const deleteWorkspaces = async (id) => {
+    console.log('workspace',workspace);
     const deleteResult = await deleteWorkspace(id, userToken)
       .then(function (response) {
+        console.log("status res",response.status);
         if (response.status) {
           toast.success("حذف با موفقیت انجام شد !");
-          setWorkspace(workspace.filter((wspc) => wspc.id !== id));
+          getDatas();
+          // setWorkspace(workspace.filter((wr) => wr.id !== id));
         } else {
           toast.error("خطا !! مجددا تلاش نمایید");
         }
       })
       .catch(function (err) {
+        console.log("w2222",workspace.data)
         toast.error("خطا !! مجددا تلاش نمایید");
         console.log("error", err);
       });
@@ -146,7 +150,7 @@ function Workspace() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                          ${wspc?.name}
+                          {wspc?.name}
                           </Typography>
                         </td>
                         <td className={className}>
