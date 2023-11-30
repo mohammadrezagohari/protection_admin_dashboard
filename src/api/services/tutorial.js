@@ -61,7 +61,6 @@ export const createTutorials = async (values, userToken) => {
             if (response.status !== 200) {
                 return null;
             }
-            console.log("respppp", response.status);
             return response;
         });
     return data;
