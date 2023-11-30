@@ -89,28 +89,35 @@ export function ShowPoster() {
     showPosters(id);
   }, []);
 
-  const editPoster = async (id, initialValues) => {
-    const editResult = await updatePoster(id, initialValues, userToken)
-      .then(function (response) {
-        console.log(initialValues);
-        console.log("sssssssss", JSON.stringify(response.data));
-        if (response.data.status == true) {
-          toast.success("تغییرات با موفقیت انجام گرفت");
-        }
-      })
-      .catch(function (error) {
-        toast.error("خطا !! مجددا تلاش نمایید");
-        console.log(error.message);
-      });
-
-    return editResult;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const editResult = await updatePoster(id, {
+        poster: poster,
+        title: title,
+        category_id: category_id,
+        }, userToken)
+          .then(function (response) {
+            if (response.status == true) {
+              toast.success("  تغییرات با موفقیت افزوده شد !");
+            }
+            console.log(response?.data?.status);
+            if(response?.data?.status == true)
+            console.log(response?.data?.status);
+          })
+          .catch(function (err) {
+            console.log("error", err);
+          });
+    
+        return editResult;
+  
   };
 
-  //   useEffect(() => {
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 3000);
-  //   }, []);
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+    }, []);
 
   return (
     <>
@@ -142,7 +149,7 @@ export function ShowPoster() {
           <CardBody className="h-max px-0 pt-0 pb-2">
             <form
               method="post"
-              onSubmit={editPoster}
+              onSubmit={handleSubmit}
               className="m-6 mb-4 flex flex-wrap"
             >
               <div className="w-7/12">
