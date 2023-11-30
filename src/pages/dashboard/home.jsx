@@ -69,6 +69,10 @@ const Home = () => {
     alignItems: "center",
   };
 
+  // const shadow={
+  //   boxShadow: " 0px 5px 10px 0px rgba(0,0,0,0.1)"
+  // }
+
   const articleCount = async () => {
     const result = await getArticleCount(userToken)
       .then((result) => {
@@ -123,6 +127,8 @@ const Home = () => {
       .then(function (response) {
         console.log("response", response);
         setTutorials(response?.data);
+        setImagePreview(response);
+        console.log("main image",response?.data);
       })
       .catch(function (err) {
         console.log("error", err);
@@ -187,11 +193,11 @@ const Home = () => {
 
   return (
     <>
-      <Card className="rounded-4 h-full w-full bg-white">
-        <CardBody className="h-full w-full p-0">
+      <Card className="flex flex-col  rounded-4 h-[700px] p-6 w-full bg-white">
+        <CardBody className="h-max w-full  p-0"  >
           <label
             id="parentCkeck"
-            className="h-26 flex w-full items-center justify-around  overflow-hidden rounded-xl border-2 border-gray-100 p-5 pb-8 "
+            className="shadow-md h-26 flex w-full items-center justify-around  overflow-hidden rounded-xl border-2 border-gray-100 p-5 pb-8 "
           >
             <CategotyBox name={"دسته ها"} src="../img/svgs/Data Set.svg">
               <div>
@@ -214,7 +220,7 @@ const Home = () => {
               </div>
             </CategotyBox>
           </label>
-          <div className="tutorialLists h-46 mt-4 overflow-hidden rounded-xl border-2 border-gray-100">
+          <div className="tutorialLists h-46 mt-8  shadow-md overflow-hidden rounded-xl border-2 border-gray-100">
             <section className="relative m-0 flex h-12 w-full  items-center bg-hrcolor pr-4 text-white ">
               <Typography>لیست آخرین آموزش ها</Typography>
               <span className="absolute left-4  ">
@@ -279,13 +285,10 @@ const Home = () => {
                             </td>
                             <td className={className}>
                               <Typography className="flex items-center justify-center text-xs font-semibold text-blue-gray-600">
-                                {tutorial?.main_image}
                                 <div className=" h-8 w-8 rounded-md border-2">
                                   <img
                                     className="h-full w-full rounded-md object-cover"
-                                    src={
-                                      imagePreview ?? "../images/no-image.svg"
-                                    }
+                                    src={`https://product.gandom.link/${tutorial?.main_image}`}
                                     alt="آپلود عکس"
                                   />
                                 </div>
@@ -318,7 +321,7 @@ const Home = () => {
             )}
           </div>
 
-          <div className="tutorialLists h-46 mt-4 overflow-hidden rounded-xl border-2 border-gray-100">
+          <div className="tutorialLists h-46 mt-8 shadow-md overflow-hidden rounded-xl border-2 border-gray-100">
             <section className="relative m-0 flex h-12 w-full  items-center bg-hrcolor pr-4 text-white ">
               <Typography>لیست آخرین کاربران</Typography>
               <span className="absolute left-4  ">
