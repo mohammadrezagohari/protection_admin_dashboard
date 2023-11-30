@@ -15,8 +15,8 @@ const CategoryDropdown = ({ category, setCategory, selected_id = null }) => {
   useEffect( 
     function () {
       if (!isLoading && !isError) {
-        const slItem = data?.data.find((c) => c.id == selected_id);
-        console.log('find item ',slItem);
+        const collection = data?.data;
+        const slItem = collection.filter((c) => c?.id == selected_id);
         if (slItem) {
           setSelected({
             value: slItem.id,
@@ -42,10 +42,8 @@ const CategoryDropdown = ({ category, setCategory, selected_id = null }) => {
     return <div>در حال بارگذاری...</div>;
   }
   if (!selected && selected_id) {
-    console.log('selected_id',selected_id)
     return <div>Loading...</div>;
   }
-  console.log('selected',selected);
   return (
     <div className="relative h-10 w-full min-w-[200px]">
       <Select

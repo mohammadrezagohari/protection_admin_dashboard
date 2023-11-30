@@ -47,6 +47,7 @@ import Notif from "./pages/dashboard/notification/notification";
 import CreateNotif from "./pages/dashboard/notification/createNotif";
 import ShowWorkspace from "./pages/dashboard/workspace/showWorkspace";
 import ShowVideo from "./pages/dashboard/video/showVideo";
+import ShowTutorials from "./pages/dashboard/tutorials/show-tutorials";
 
 function App() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -118,6 +119,10 @@ function App() {
             <Route
               path="/dashboard/tutorials/create"
               element={<CreateTutorialPage />}
+            />  
+            <Route
+              path="/dashboard/tutorial/show/:id"
+              element={<ShowTutorials />}
             />            
             {/* <Route
               path="/dashboard/tutorials/create"

@@ -105,7 +105,7 @@ export function EditUser() {
         }, userToken)
             .then(function (response) {
                 if (response.status) {
-                    toast.success(" سوال با موفقیت درج شد!   !");
+                    toast.success(" عملیات با موفقیت درج شد!   !");
                 } else {
                     if (response?.success == false) {
                         toast(`${response?.data?.first_name != undefined ? response?.data?.first_name : ""} \n
