@@ -24,7 +24,7 @@ const CategoryDropdown = ({ category, setCategory, selected_id = null }) => {
           });
         } 
         else {
-          const slItem = data[0];
+          const slItem = data.data[0];
           setSelected({
             value: slItem.id,
             label: slItem.name,

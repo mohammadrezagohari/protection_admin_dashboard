@@ -174,12 +174,10 @@ export function CreatePoster() {
               </div>
               <div className="w-7/12">
                 <label className="ml-3">دسته بندی</label>
+                {console.log(" category", category_id)}
                 <CategoryDropdown
                   category={category_id}
                   setCategory={setCategory_id}
-                  onChange={(event) =>
-                    console.log("result event", event.target.value)
-                  }
                 />
               </div>
               <div className="col-span-2 mt-4 w-6/12">
