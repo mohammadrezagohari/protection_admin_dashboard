@@ -146,15 +146,19 @@ export function ShowVideo() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
-            <Link to={`/dashboard/video`} className="mr-3" style={linkStyle}>
+               <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <Typography variant="h6" color="white" className="h-14 flex items-center">
+                ویرایش ویدئو
+            </Typography>
+            <div className="py-5">
+            <Link
+              to={`/dashboard/systemgoal`}
+              className="mr-3"
+              style={linkStyle}
+            >
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ساخت عنوان جدید
-            </Typography>
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form

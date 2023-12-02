@@ -6,16 +6,17 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useParams} from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
 import CategoryDropdown from "@/components/category-dropdown/category-dropdown";
-import { getArticle,createArticle } from "@/api/services/article";
+import { showArticle,updateArticle } from "@/api/services/article";
 import CKEditorText from "@/components/base/ckeditor/ckeditor.jsx";
 
-export function CreateArticle() {
+export function ShowArticle() {
   const { userToken } = useContext(AuthContext);
+  const {id} = useParams();
   const [title,setTitle] = useState([]);
   const [context,setContext] = useState([]);
   const [category_id,setCategory_id] = useState([]);
@@ -49,54 +50,56 @@ export function CreateArticle() {
     setImage(event.target.files[0]);
     setImagePreview(file_url);
   };
+  const showArticles = async () => {
+    const showResult = await showArticle(id,userToken)
+      .then((result) => {
+        console.log('result', result)
+       setTitle(result?.data?.title);
+       setContext(result?.data?.context);
+       setCategory_id(result?.data?.category_id);
+       setImage(result?.data?.image);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    return showResult;
+  };
+  useEffect(() => {
+    showArticles(id);
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const createResult = await createArticle(
-      {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const editResult = await updateArticle(id, {
         title:title,
         context:context,
         category_id:category_id,
         image:image,
-      },
-       userToken)
-      .then(function (response) {
-        console.log('dataresult', response)
-        if (response.status) {
-          toast.success(" مقاله با موفقیت درج شد!   !");
-        } else {
-          if (response?.success == false) {
-            toast(
-              `${
-                response?.data?.title != undefined ? response?.data?.title : ""
-              } \n
-              ${
-                response?.data?.context != undefined ? response?.data?.context : ""
-              } \n
-              ${
-                response?.data?.category_id != undefined ? response?.data?.category_id : ""
-              } \n`,{
-                duration: 2000,
-              },
-            );
-          }
-          toast.error("خطایی رخ داده است");
-        }
-        console.log(response);
-      })
-      .catch(function (error) {
-        toast.error("خطا !! مجددا تلاش نمایید");
-        console.log("error :", error);
-        console.log(data);
-      });
-
-    return createResult;
+        }, userToken)
+          .then(function (response) {
+         
+            if(response?.status == true)
+            console.log(response?.status);
+            toast.success("  تغییرات با موفقیت افزوده شد !");
+          })
+          .catch(function (err) {
+            
+            console.log("error", err);
+          });
+    
+        return editResult;
+  
   };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
   }, []);
+
+
+
   return (
     <>
       {loading ? (
@@ -140,7 +143,7 @@ export function CreateArticle() {
                 <label className="ml-3">  عنوان مقاله </label>
                 <input
                   onChange={(e) => {
-                    setTitle(e.currentTarget.value);
+                    setTitle(e.target.value);
                   }}
                   value={title}
                   type="text"
@@ -165,6 +168,7 @@ export function CreateArticle() {
                 <CategoryDropdown
                   category={category_id}
                   setCategory={setCategory_id}
+                  selected_id={category_id}
                 />
               </div>
 
@@ -181,7 +185,7 @@ export function CreateArticle() {
                   <div className=" h-20 w-36 rounded-md border-2">
                     <img
                         className="h-full w-full rounded-md object-cover"
-                        src={imagePreview ?? "../../images/no-image.svg"}
+                        src={imagePreview ?? "../../../images/no-image.svg"}
                         alt="آپلود عکس"
                     />
                   </div>
@@ -199,4 +203,4 @@ export function CreateArticle() {
 
 }
 
-export default CreateArticle;
+export default ShowArticle;

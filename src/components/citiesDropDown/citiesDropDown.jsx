@@ -9,7 +9,7 @@ const CitiesDropdown = ({ cities, setCities, selected_id = null }) => {
   const { userToken } = useContext(AuthContext);
   const { data, isLoading, isError } = useQuery(
     ["getCitiesCollection", userToken],
-    () => getCities(userToken)
+    () => getCities(userToken) 
   );
 
   useEffect(() => {

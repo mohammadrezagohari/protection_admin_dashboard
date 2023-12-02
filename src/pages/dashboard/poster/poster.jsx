@@ -114,7 +114,7 @@ function Poster() {
               <table className="w-full min-w-[640px] table-auto text-right">
                 <thead>
                   <tr>
-                    {["#", "عنوان","شماره دسته بندی" ,"تنظیمات", ].map((el) => (
+                    {["#", "عنوان"," دسته بندی" ,"تنظیمات", ].map((el) => (
                       <th
                         key={el}
                         className="place-items-center border-b 	 border-blue-gray-50 py-3 px-5 "

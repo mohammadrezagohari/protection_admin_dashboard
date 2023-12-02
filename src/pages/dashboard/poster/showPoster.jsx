@@ -129,15 +129,15 @@ export function ShowPoster() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <Typography variant="h6" color="white" className="flex h-14 items-center">
+              ویرایش پوستر جدید
+            </Typography>
+            <div className="py-5">
             <Link to={`/dashboard/poster`} className="mr-3" style={linkStyle}>
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ویرایش پوستر جدید
-            </Typography>
           </CardHeader>
           <CardBody className="h-max px-0 pt-0 pb-2">
             <form

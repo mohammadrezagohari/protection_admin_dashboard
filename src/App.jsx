@@ -51,6 +51,7 @@ import ShowBenefits from "./pages/dashboard/systemBenefit/showBenefit";
 import Hospital from "./pages/dashboard/hospital/hospital";
 import CreateHospital from "./pages/dashboard/hospital/create-hospital";
 import ShowHospital from "./pages/dashboard/hospital/showHospital";
+import ShowArticle from "./pages/dashboard/articles/showArticle";
 
 function App() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -84,6 +85,8 @@ function App() {
         
             <Route path="/dashboard/articles" element={<Article />} />
             <Route path="/dashboard/articles/create" element={<CreateArticle />} />
+            <Route path="/dashboard/articles/show/:id" element={<ShowArticle />} />
+
 
             <Route
               path="/dashboard/patient"
