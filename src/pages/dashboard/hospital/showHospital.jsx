@@ -6,15 +6,17 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { createHospital } from "@/api/services/hospital";
+import { showHospital,updateHospital } from "@/api/services/hospital";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
 import CitiesDropdown from "@/components/citiesDropDown/citiesDropDown";
 
-export function CreateHospital() {
+export function ShowHospital() {
   const { userToken } = useContext(AuthContext);
+  const { id } = useParams();
+  console.log("gggggggggggg",id);
   const [name,setName] = useState([]);
   const [address,setAddress] = useState([]);
   const [telephone,setTelephone] = useState([]);
@@ -55,10 +57,32 @@ export function CreateHospital() {
     setImagePreview(file_url);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const createResult = await createHospital(
-      {
+  const showHospitals = async () => {
+    const showResult = await showHospital(id,userToken)
+      .then((result) => {
+        console.log('result', result)
+        setName(result?.data?.name);
+        setAddress(result?.data?.address);
+        setDescription(result?.data?.description);
+        setEmail(result?.data?.email);
+        setCityId(result?.data?.city_id);
+        setTelephone(result?.data?.telephone);
+        setImage(result?.data?.image);
+        setWorkHour(result?.data?.work_hour);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    return showResult;
+  };
+  useEffect(() => {
+    showHospitals(id);
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const editResult = await updateHospital(id, {
         name:name,
         address: address,
         telephone: telephone,
@@ -67,55 +91,23 @@ export function CreateHospital() {
         work_hour:workHour,
         city_id:cityId,
         image:image,
-      },
-       userToken)
-      .then(function (response) {
-        console.log('dataresult', response)
-        if (response.status) {
-          toast.success(" اطلاعات بیمارستان با موفقیت درج شد!   !");
-        } else {
-          if (response?.success == false) {
-            toast(
-              `${
-                response?.data?.name != undefined ? response?.data?.name : ""
-              } \n
-              ${
-                response?.data?.address != undefined ? response?.data?.address : ""
-              } \n
-              ${
-                response?.data?.telephone != undefined ? response?.data?.telephone : ""
-              } \n
-              ${
-                response?.data?.description != undefined ? response?.data?.description : ""
-              } \n
-              ${
-                response?.data?.email != undefined ? response?.data?.email : ""
-              } \n
-              ${
-                response?.data?.work_hour != undefined ? response?.data?.work_hour : ""
-              } \n
-              ${
-                response?.data?.city_id != undefined ? response?.data?.city_id : ""
-              } \n
-              ${
-                response?.data?.image != undefined ? response?.data?.image : ""
-              } \n`,{
-                duration: 2000,
-              },
-            );
-          }
-          toast.error("خطایی رخ داده است");
-        }
-        console.log(response);
-      })
-      .catch(function (error) {
-        toast.error("خطا !! مجددا تلاش نمایید");
-        console.log("error :", error);
-        // console.log(data);
-      });
-
-    return createResult;
+        }, userToken)
+          .then(function (response) {
+            if (response.status == true) {
+              toast.success("  تغییرات با موفقیت افزوده شد !");
+            }
+            console.log(response?.data?.status);
+            if(response?.data?.status == true)
+            console.log(response?.data?.status);
+          })
+          .catch(function (err) {
+            console.log("error", err);
+          });
+    
+        return editResult;
+  
   };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -141,7 +133,7 @@ export function CreateHospital() {
           <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
            <div className="h-18 flex items-center">
            <Typography variant="h6" color="white">
-              بیمارستان جدید   
+               ویرایش اطلاعات بیمارستان   
             </Typography>
            </div>
             <div className="py-5">
@@ -195,6 +187,7 @@ export function CreateHospital() {
                   <CitiesDropdown
                   cities={cityId}
                   setCities={setCityId}
+                  selected_id={cityId}
                   />
               </div>
               <div className="col-span-1 md:col-span-1 lg:col-span-1  mt-6 ">
@@ -268,7 +261,7 @@ export function CreateHospital() {
                   <div className=" h-20 w-36 rounded-md border-2 p-3">
                     <img
                       className="h-full w-full rounded-md object-cover"
-                      src={imagePreview ?? "../../images/no-image.svg"}
+                      src={imagePreview ?? "../../../images/no-image.svg"}
                       alt="آپلود عکس"
                     />
                   </div>
@@ -286,4 +279,4 @@ export function CreateHospital() {
 
 }
 
-export default CreateHospital;
+export default ShowHospital;

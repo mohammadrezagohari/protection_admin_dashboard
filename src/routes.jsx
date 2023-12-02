@@ -30,6 +30,7 @@ import Article from "./pages/dashboard/articles/articles";
 import Workspace from "./pages/dashboard/workspace/workspace";
 import CustomMessage from "./pages/dashboard/customMessage/customMessage";
 import Notif from "./pages/dashboard/notification/notification";
+import Hospital from "./pages/dashboard/hospital/hospital";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -120,6 +121,12 @@ export const routes = [
         name: "  محل خدمت",
         path: "/workspace",
         element: <Workspace />,
+      },
+      {
+        icon: <BellIcon {...icon} />,
+        name: "بیمارستان ها",
+        path: "/hospital",
+        element: <Hospital />,
       },
       {
         icon: <BellIcon {...icon} />,

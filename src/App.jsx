@@ -47,6 +47,9 @@ import Notif from "./pages/dashboard/notification/notification";
 import CreateNotif from "./pages/dashboard/notification/createNotif";
 import ShowWorkspace from "./pages/dashboard/workspace/showWorkspace";
 import ShowBenefits from "./pages/dashboard/systemBenefit/showBenefit";
+import Hospital from "./pages/dashboard/hospital/hospital";
+import CreateHospital from "./pages/dashboard/hospital/create-hospital";
+import ShowHospital from "./pages/dashboard/hospital/showHospital";
 
 function App() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -156,6 +159,11 @@ function App() {
           <Route path="/dashboard/notification" element={<Notif />} />
           <Route path="/dashboard/notification/create" element={<CreateNotif />} />
           <Route path="/" element={<Home />} />
+
+
+          <Route path="/dashboard/hospital" element={<Hospital />} />
+          <Route path="/dashboard/hospital/create" element={<CreateHospital />} /> 
+          <Route path="/dashboard/hospital/show/:id" element={< ShowHospital/>} /> 
 
           </Routes>
         </Dashboard>
