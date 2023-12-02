@@ -16,10 +16,15 @@ import Select from "react-select";
 
 export function CreateNotif() {
   const { userToken } = useContext(AuthContext);
-  const [subject,setSubject] = useState([]);
+  const [title,setTitle] = useState([]);
   const [context,setContext] = useState([]);
-  const [status,setStatus] = useState(null);
+  const [status,setStatus] = useState("");
 
+
+  const options = [
+    { value: true, label: "فعال" },
+    // { value: false, label: "غیرفعال" },
+  ]
   const [loading, setLoading] = useState(true);
   
 
@@ -49,7 +54,7 @@ export function CreateNotif() {
     e.preventDefault();
     const createResult = await createNotification(
       {
-        subject: subject,
+        title: title,
         context:context,
         status:status,
       },
@@ -57,12 +62,13 @@ export function CreateNotif() {
       .then(function (response) {
         console.log('dataresult', response)
         if (response.status) {
-          toast.success("هشدار با موفقیت ارسال شد !");
+          toast.success("اعلان با موفقیت ارسال شد !");
+          toast.success(response?.data?.context);
         } else {
           if (response?.success == false) {
             toast(
               `${
-                response?.data?.subject != undefined ? response?.data?.subject : ""
+                response?.data?.title != undefined ? response?.data?.title : ""
               } \n
               ${
                 response?.data?.context != undefined ? response?.data?.context : ""
@@ -108,7 +114,13 @@ export function CreateNotif() {
         </div>
       ) : (
         <Card style={{height:"570px"}}>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <div className="h-14 flex items-center">
+              <Typography variant="h6" color="white">
+                ارسال اعلان   
+              </Typography>
+            </div>
+            <div className="py-5">
             <Link
               to={`/dashboard/notification`}
               className="mr-3"
@@ -117,10 +129,6 @@ export function CreateNotif() {
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ارسال اعلان   
-            </Typography>
           </CardHeader>
           <CardBody className="h-full px-0 pt-0 pb-2">
             <form
@@ -132,13 +140,13 @@ export function CreateNotif() {
                 <label className="ml-3">  عنوان اعلان  </label>
                 <input
                   onChange={(e) => {
-                    setSubject(e.currentTarget.value);
+                    setTitle(e.currentTarget.value);
                     console.log(e.currentTarget.value);
                   }}
-                  value={subject}
+                  value={title}
                   type="text"
                   className="ml-3 p-4"
-                  name="subject"
+                  name="title"
                   style={inputStyle}
                   autoComplete="off"
                 />
@@ -159,25 +167,24 @@ export function CreateNotif() {
                 </textarea>
               </div>
               <div className="">
-                          <label htmlFor="statusSelect">وضعیت </label>
-                          <Select
-                            id="statusSelect"
-                            className="w-full mt-2"
-                            onChange={handleChange} autoFocus={true}
-                            value={status}
-                            defaultValue={status ? status : null}
-                            options={[
-                              {
-                                value: true,
-                                label: "فعال",
-                              },
-                              {
-                                value: false,
-                                label: "غیرفعال",
-                              },
-                            ]}
-                          />
-                    </div>
+                <label htmlFor="isActive">وضعیت نمایش</label>
+                <Select
+                  id="isActive"
+                  className="mt-2 w-full md:w-7/12 lg:w-7/12"
+                  onChange={handleChange}
+                  autoFocus={true}
+                  options={options}
+                //   defaultValue={
+                //     options.filter(function(option) {
+                //     return option.label === is_active;
+                //     })}
+                // defaultValue={is_active == "1" ? "فعال" : 'غیرفعال'}
+                  value={options.filter(function(option) {
+                      return option.value === status;
+                    })}
+                    label="Single select"
+                />
+              </div>
               <div className="col-span-2 mt-2 w-max">
                 <Button type="submit" className="w-4/12" style={{width:'150px'}}>ذخیره</Button>
               </div>
