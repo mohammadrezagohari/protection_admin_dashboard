@@ -70,7 +70,7 @@ export const updateBenefit = async (id, values, userToken) => {
     is_active: values.is_active,
   });
   const requestOptions = {
-    method: "PATCH",
+    method: "POST",
     headers: myHeaders,
     body: raw,
     redirect: "follow",

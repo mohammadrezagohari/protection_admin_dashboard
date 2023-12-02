@@ -12,24 +12,24 @@ const CategoryDropdown = ({ category, setCategory, selected_id = null }) => {
     ["getCategoryCollection", userToken],
     () => getCategory("50",userToken)
   );
-  useEffect(
+  useEffect( 
     function () {
       if (!isLoading && !isError) {
-        const slItem = data?.data.find((c) => c.id == selected_id);
-        console.log('find item ',slItem);
+        const collection = data?.data;
+        const slItem = collection.filter((c) => c?.id == selected_id);
         if (slItem) {
           setSelected({
             value: slItem.id,
             label: slItem.name,
           });
         } 
-        // else {
-        //   const slItem = data?.data[0];
-        //   setSelected({
-        //     value: slItem.id,
-        //     label: slItem.name,
-        //   });
-        // }
+        else {
+          const slItem = data[0];
+          setSelected({
+            value: slItem.id,
+            label: slItem.name,
+          });
+        }
       }
     },
     [data, isLoading, isError]
@@ -41,16 +41,15 @@ const CategoryDropdown = ({ category, setCategory, selected_id = null }) => {
   if (isLoading) {
     return <div>در حال بارگذاری...</div>;
   }
-  //   if (!selected) {
-  //     return <div>Loading...</div>;
-  //   }
-  console.log('selected',selected);
+  if (!selected && selected_id) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="relative h-10 w-full min-w-[200px]">
       <Select
         name="categoty_id"
         isSearchable={true}
-        options={data?.data?.map((field) => ({
+        options={data?.data.map((field) => ({
           value: field.id,
           label: field.name,
         }))}

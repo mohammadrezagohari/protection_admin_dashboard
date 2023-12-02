@@ -1,16 +1,16 @@
 import {
-  HomeIcon,
-  UserCircleIcon,
-  TableCellsIcon,
-  BellIcon,
-  ArrowRightOnRectangleIcon,
-  UserPlusIcon,
-  
+    HomeIcon,
+    UserCircleIcon,
+    TableCellsIcon,
+    BellIcon,
+    ArrowRightOnRectangleIcon,
+    UserPlusIcon,
+
 } from "@heroicons/react/24/solid";
 // import { HiNewspaper } from 'react-icons/hi2';
 
-import {  Profile, Notifications, Users } from "@/pages/dashboard";
-import { SignIn } from "@/pages/auth";
+import {Profile, Notifications, Users} from "@/pages/dashboard";
+import {SignIn} from "@/pages/auth";
 import Register from "./pages/auth/register";
 import Forget from "./pages/auth/forget";
 import Category from "./pages/dashboard/category/category";
@@ -30,35 +30,23 @@ import Article from "./pages/dashboard/articles/articles";
 import Workspace from "./pages/dashboard/workspace/workspace";
 import CustomMessage from "./pages/dashboard/customMessage/customMessage";
 import Notif from "./pages/dashboard/notification/notification";
+import Patient from "@/pages/dashboard/patient/patient.jsx";
+import Hospital from "./pages/dashboard/hospital/hospital";
 
 const icon = {
-  className: "w-5 h-5 text-inherit",
+    className: "w-5 h-5 text-inherit",
 };
 
 export const routes = [
-  {
-    layout: "dashboard",
-    pages: [
-      {
-        icon: <HomeIcon {...icon} />,
-        name: "داشبورد",
-        path: "/",
-        element: <Home />,
-      },
-      
-      {
-        icon: <UserCircleIcon {...icon} />,
-        name: "پروفایل",
-        path: "/profile/profile",
-        element: <Profile />,
-      },
-      { 
-        icon: <TableCellsIcon {...icon} />,
-        name: "مدیریت کاربران",
-        path: "/users",
-        element: <Users />,
-      },
- 
+    {
+        layout: "dashboard",
+        pages: [
+            {
+                icon: <HomeIcon {...icon} />,
+                name: "داشبورد",
+                path: "/",
+                element: <Home/>,
+            },
 
       {
         icon: <BellIcon {...icon} />,
@@ -71,13 +59,18 @@ export const routes = [
         name: "مقالات",
         path: "/articles",
         element: <Article />,
-      },
-      {
+      }, {
         icon: <BellIcon {...icon} />,
-        name: "ارسال متحوا به کاربر",
-        path: "/patientcontent",
-        element: <PatientContent />,
-      },
+        name: "لیست بیماران",
+        path: "/patient-content",
+        element: <PatientContent/>,
+    },
+    {
+        icon: <BellIcon {...icon} />,
+        name: "ارسالی هوشمند به بیماران",
+        path: "/patient",
+        element: <Patient/>,
+    },
       {
         icon: <BellIcon {...icon} />,
         name: "دسته بندی ها",
@@ -120,6 +113,12 @@ export const routes = [
         name: "  محل خدمت",
         path: "/workspace",
         element: <Workspace />,
+      },
+      {
+        icon: <BellIcon {...icon} />,
+        name: "بیمارستان ها",
+        path: "/hospital",
+        element: <Hospital />,
       },
       {
         icon: <BellIcon {...icon} />,

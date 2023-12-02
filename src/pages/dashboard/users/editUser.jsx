@@ -4,7 +4,7 @@ import {
 import Select from "react-select";
 import {useParams} from "react-router-dom";
 // import {Formik, Form, Field} from "formik";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState,useRef } from "react";
 // import axios from "axios";
 // import ProvinceDropdown from "@/components/provinces/ProvinceDropdown";
 import {showProfile, updateProfiles} from "@/api/services/auth-api";
@@ -14,6 +14,7 @@ import {showUser, updateUser} from "@/api/services/users";
 import CitiesDropdown from "@/components/citiesDropDown/citiesDropDown";
 import WorkspaceDropdown from "@/components/workspace-dropdown/workspace-dropdown";
 import {toast} from "react-hot-toast";
+import baseUrl from "@/configs/base-url.js";
 
 export function EditUser() {
     const {userToken} = useContext(AuthContext);
@@ -28,6 +29,13 @@ export function EditUser() {
     const [password, setPassword] = useState(null);
     const [sex, setSex] = useState(null);
     const [workspace, setWorkspace] = useState(null);
+
+
+    const AvatarInput = useRef(null);
+    const inputText = useRef(null);
+    const dropdown = useRef(null);
+
+
 
     const [imagePreview, setImagePreview] = useState(null);
 
@@ -56,7 +64,8 @@ export function EditUser() {
     const showUserProfileInfo = async (id) => {
         const showResult = await showUser(id, userToken)
             .then(function (response) {
-                setAvatar(response?.data?.avatar);
+                setImagePreview(`${baseUrl}${response?.data?.avatar}`);
+                setAvatar(`${baseUrl}/${response?.data?.avatar}`);
                 setFirstname(response?.data?.first_name);
                 setLastname(response?.data?.last_name);
                 setMobile(response?.data?.mobile);
@@ -80,6 +89,9 @@ export function EditUser() {
 
     const editUserProfileInfo = async (e) => {
         e.preventDefault();
+
+
+
         const editResult = await updateUser(id, {
             "avatar": avatar,
             "first_name": firstname,
@@ -93,7 +105,7 @@ export function EditUser() {
         }, userToken)
             .then(function (response) {
                 if (response.status) {
-                    toast.success(" سوال با موفقیت درج شد!   !");
+                    toast.success(" عملیات با موفقیت درج شد!   !");
                 } else {
                     if (response?.success == false) {
                         toast(`${response?.data?.first_name != undefined ? response?.data?.first_name : ""} \n

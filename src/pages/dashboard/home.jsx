@@ -13,23 +13,9 @@ import {
   Button,
   Input,
 } from "@material-tailwind/react";
-import { Formik } from "formik";
-import {
-  BanknotesIcon,
-  CreditCardIcon,
-  LockClosedIcon,
-} from "@heroicons/react/24/solid";
-import {
-  HomeIcon,
-  ChatBubbleLeftEllipsisIcon,
-  Cog6ToothIcon,
-  PencilIcon,
-} from "@heroicons/react/24/solid";
+
 import { Link } from "react-router-dom";
-import { ProfileInfoCard, MessageCard } from "@/widgets/cards";
-import { platformSettingsData, conversationsData, projectsData } from "@/data";
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import CategotyBox from "@/components/CategoryBox/CategoryBox";
 import { ThreeDots } from "react-loader-spinner";
 import Sortable from "sortablejs";
@@ -44,8 +30,11 @@ import {
 import { AuthContext } from "@/gard/context/AuthContext";
 import { getTutorials } from "@/api/services/tutorial";
 import { fetchUsers } from "@/api/services/users";
+// import PreviewModal from "@/components/preview-modal/previewModal";
 
 const Home = () => {
+   
+  // const [openModal,setOpenModal] = useState(false);
   const { userToken } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [loadingUser, setLoadingUser] = useState(true);
@@ -58,6 +47,9 @@ const Home = () => {
   const listRef = useRef(null);
   const [imagePreview, setImagePreview] = useState();
   const [isOpentDropDown, setIsOpentDropDown] = useState(null);
+  const modalRef= useRef();
+  const parentModalRef= useRef();
+
 
   const catBoxStyle = {
     border: "1px solid #E9E9E9",
@@ -68,6 +60,26 @@ const Home = () => {
     justifyContent: "flex-start",
     alignItems: "center",
   };
+
+  const shadow={
+    // boxShadow: " 0px 5px 10px 0px rgba(0,0,0,0.1)",
+    backgroundColor:"rgba(0,0,0,.7)",
+    visibility:'hidden',
+    opacity:'0',
+  }
+
+  const openModal= ()=>{
+    modalRef.current.style.transform ='scale(1)';
+    parentModalRef.current.style.opacity ='1';
+    parentModalRef.current.style.visibility ='visible';
+
+  }
+  const closeModal= ()=>{
+    parentModalRef.current.style.visibility ='hidden';
+    parentModalRef.current.style.opacity ='0';
+    modalRef.current.style.transform ='scale(0)';
+
+  }
 
   const articleCount = async () => {
     const result = await getArticleCount(userToken)
@@ -123,6 +135,8 @@ const Home = () => {
       .then(function (response) {
         console.log("response", response);
         setTutorials(response?.data);
+        setImagePreview(response);
+        console.log("main image",response?.data);
       })
       .catch(function (err) {
         console.log("error", err);
@@ -185,13 +199,30 @@ const Home = () => {
     }, 3000);
   }, []);
 
+
+
   return (
     <>
-      <Card className="rounded-4 h-full w-full bg-white">
-        <CardBody className="h-full w-full p-0">
+      <Card className="flex flex-col  rounded-4 h-[700px] p-6 w-full bg-white">
+        <CardBody className="h-max w-full  p-0"  >
+
+        <div  ref={parentModalRef} style={shadow} className="duration-500 transition-all modal flex justify-center items-center rounded-8 z-50 fixed top-0 bottom-0 left-0 right-0 h-screen text-white">
+            
+            {/* <iframe src="https://product.gandom.link/" title="W3Schools Free Online Web Tutorials"></iframe> */}
+            <div ref={modalRef} className="duration-500 scale-0 bg-black w-[480px] h-[370px] rounded-lg flex justify-center items-center">
+            <div  className="closeModal w-full absolute top-0 h-10 ">
+                <button onClick={closeModal} className=" w-8 h-8 rounded-md bg-red-900 mt-4 mr-4 text-white border-none flex justify-center items-center p-0">
+                  <span className="mt-1">✕</span>
+                </button>
+            </div>
+              <Typography>This is the sample preview dont take it serious!!!</Typography>
+            </div>
+        </div>
+
+
           <label
             id="parentCkeck"
-            className="h-26 flex w-full items-center justify-around  overflow-hidden rounded-xl border-2 border-gray-100 p-5 pb-8 "
+            className="shadow-md h-26 flex w-full items-center justify-around  overflow-hidden rounded-xl border-2 border-gray-100 p-5 pb-8 "
           >
             <CategotyBox name={"دسته ها"} src="../img/svgs/Data Set.svg">
               <div>
@@ -214,7 +245,7 @@ const Home = () => {
               </div>
             </CategotyBox>
           </label>
-          <div className="tutorialLists h-46 mt-4 overflow-hidden rounded-xl border-2 border-gray-100">
+          <div className="tutorialLists h-46 mt-8  shadow-md overflow-hidden rounded-xl border-2 border-gray-100">
             <section className="relative m-0 flex h-12 w-full  items-center bg-hrcolor pr-4 text-white ">
               <Typography>لیست آخرین آموزش ها</Typography>
               <span className="absolute left-4  ">
@@ -279,13 +310,11 @@ const Home = () => {
                             </td>
                             <td className={className}>
                               <Typography className="flex items-center justify-center text-xs font-semibold text-blue-gray-600">
-                                {tutorial?.main_image}
                                 <div className=" h-8 w-8 rounded-md border-2">
                                   <img
                                     className="h-full w-full rounded-md object-cover"
-                                    src={
-                                      imagePreview ?? "../images/no-image.svg"
-                                    }
+                                    // https://product.gandom.link/
+                                    src={`${tutorial?.main_image}`}
                                     alt="آپلود عکس"
                                   />
                                 </div>
@@ -296,7 +325,7 @@ const Home = () => {
                                 to=""
                                 className="flex items-center justify-center"
                               >
-                                <img src="../img/svgs/eye.svg" alt="" />
+                                <img src="../img/svgs/eye.svg" alt="" onClick={openModal}/>
                               </Link>
                             </td>
                           </tr>
@@ -318,7 +347,7 @@ const Home = () => {
             )}
           </div>
 
-          <div className="tutorialLists h-46 mt-4 overflow-hidden rounded-xl border-2 border-gray-100">
+          <div className="tutorialLists h-46 mt-8 shadow-md overflow-hidden rounded-xl border-2 border-gray-100">
             <section className="relative m-0 flex h-12 w-full  items-center bg-hrcolor pr-4 text-white ">
               <Typography>لیست آخرین کاربران</Typography>
               <span className="absolute left-4  ">

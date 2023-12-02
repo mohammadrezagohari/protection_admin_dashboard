@@ -4,7 +4,7 @@ import apiClient from "../apiClient";
 
 const auth_header_files = {
   "Content-Type": "multipart/form-data",
-  "Accept": "application/json",
+  Accept: "application/json",
 };
 const auth_header = {
   "Content-Type": "multipart/form-data",

@@ -10,9 +10,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
-import { Editor } from "@tinymce/tinymce-react";
 import CategoryDropdown from "@/components/category-dropdown/category-dropdown";
 import { getArticle,createArticle } from "@/api/services/article";
+import CKEditorText from "@/components/base/ckeditor/ckeditor.jsx";
 
 export function CreateArticle() {
   const { userToken } = useContext(AuthContext);
@@ -153,44 +153,10 @@ export function CreateArticle() {
               </div>
               <div className="my-3 w-full">
                 <label className="ml-3">توضیحات</label>
-                <Editor
-                style={{textAlign: 'right',fontFamily:'Verdana, sans-serif'}}
-                  apiKey="gl63rdyllvfa1swq1l7dd9hvyw785dci9mmmyf2eqchka051"
-                  onInit={(evt, editor) => (editorRef.current = editor)}
-                  initialValue=""
-                  name="first_context"
-                  onEditorChange={(content, editor) => setContext(editor.getContent())}
-                  init={{
-                    height: 250,
-                    menubar: false,
-                    plugins: [
-                      "advlist",
-                      "autolink",
-                      "lists",
-                      "link",
-                      "image",
-                      "charmap",
-                      "preview",
-                      "anchor",
-                      "searchreplace",
-                      "visualblocks",
-                      "code",
-                      "fullscreen",
-                      "insertdatetime",
-                      "media",
-                      "table",
-                      "code",
-                      //   "help",
-                      "wordcount",
-                    ],
-                    toolbar:
-                      "undo redo | blocks | " +
-                      "bold italic forecolor | alignleft aligncenter " +
-                      "alignright alignjustify | bullist numlist outdent indent | " +
-                      "removeformat ",
-                    content_style:
-                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-                  }}
+                <CKEditorText
+                    id="first_context"
+                    setContext={setContext}
+                    context={context}
                 />
               </div>
 

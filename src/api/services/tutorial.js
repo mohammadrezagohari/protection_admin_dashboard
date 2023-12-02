@@ -61,35 +61,10 @@ export const createTutorials = async (values, userToken) => {
             if (response.status !== 200) {
                 return null;
             }
-            console.log("respppp", response.status);
             return response;
         });
     return data;
-    // return data;
-    //   console.log("url", `${baseUrl}/api/tutorial/store`);
-    //   auth_header_files.Authorization = `Bearer ${userToken}`;
-    //   const response = Axios.post(
-    //     `${baseUrl}/api/tutorial/store`,
-    //     {
-    //       main_title: values.main_title,
-    //       first_title: values.first_title,
-    //       first_context: values.first_context,
-    //       second_title: values.second_title,
-    //       second_context: values.second_context,
-    //       main_image: values.main_image,
-    //       category_id: values.category_id,
-    //     },
-    //     {
-    //       headers: auth_header_files,
-    //     }
-    //   ).then((response) => {
-    //     if (response.status !== 200) {
-    //       return null;
-    //     }
-    //     console.log("respppp", response.status);
-    //     return response;
-    //   });
-    //   return response;
+
 };
 
 export const createTutorialsStep01 = (values, userToken) => {
