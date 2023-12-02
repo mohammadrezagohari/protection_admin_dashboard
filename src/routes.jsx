@@ -1,16 +1,16 @@
 import {
-  HomeIcon,
-  UserCircleIcon,
-  TableCellsIcon,
-  BellIcon,
-  ArrowRightOnRectangleIcon,
-  UserPlusIcon,
-  
+    HomeIcon,
+    UserCircleIcon,
+    TableCellsIcon,
+    BellIcon,
+    ArrowRightOnRectangleIcon,
+    UserPlusIcon,
+
 } from "@heroicons/react/24/solid";
 // import { HiNewspaper } from 'react-icons/hi2';
 
-import {  Profile, Notifications, Users } from "@/pages/dashboard";
-import { SignIn } from "@/pages/auth";
+import {Profile, Notifications, Users} from "@/pages/dashboard";
+import {SignIn} from "@/pages/auth";
 import Register from "./pages/auth/register";
 import Forget from "./pages/auth/forget";
 import Category from "./pages/dashboard/category/category";
@@ -30,148 +30,153 @@ import Article from "./pages/dashboard/articles/articles";
 import Workspace from "./pages/dashboard/workspace/workspace";
 import CustomMessage from "./pages/dashboard/customMessage/customMessage";
 import Notif from "./pages/dashboard/notification/notification";
+import Patient from "@/pages/dashboard/patient/patient.jsx";
 
 const icon = {
-  className: "w-5 h-5 text-inherit",
+    className: "w-5 h-5 text-inherit",
 };
 
 export const routes = [
-  {
-    layout: "dashboard",
-    pages: [
-      {
-        icon: <HomeIcon {...icon} />,
-        name: "داشبورد",
-        path: "/",
-        element: <Home />,
-      },
-      
-      {
-        icon: <UserCircleIcon {...icon} />,
-        name: "پروفایل",
-        path: "/profile/profile",
-        element: <Profile />,
-      },
-      { 
-        icon: <TableCellsIcon {...icon} />,
-        name: "مدیریت کاربران",
-        path: "/users",
-        element: <Users />,
-      },
- 
+    {
+        layout: "dashboard",
+        pages: [
+            {
+                icon: <HomeIcon {...icon} />,
+                name: "داشبورد",
+                path: "/",
+                element: <Home/>,
+            },
 
-      {
-        icon: <BellIcon {...icon} />,
-        name: "مدیریت آموزش ها",
-        path: "/tutorials",
-        element: <Tutorials />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "مقالات",
-        path: "/articles",
-        element: <Article />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "ارسال متحوا به کاربر",
-        path: "/patientcontent",
-        element: <PatientContent />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "دسته بندی ها",
-        path: "/categories",
-        element: <Category />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: " پوسترهای آموزشی",
-        path: "/poster",
-        element: <Poster />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "ارسال پیام به کاربر  ",
-        path: "/custom-message",
-        element: <CustomMessage />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "فواید سیستم الکترونیکی ",
-        path: "/benefit",
-        element: <SystemBenefit />,
-      },
-   
-      {
-        icon: <BellIcon {...icon} />,
-        name: "  اهداف سامانه آموزش به بیمار",
-        path: "/systemgoal",
-        element: <SystemGoal />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "اطلاعات بیماران",
-        path: "/patient",
-        element: <PatientContent />,
-      },
-      {
-        icon:<BellIcon {...icon} />,
-        name: "ویدئوهای آموزشی ",
-        path: "/video",
-        element: <Video />,
-      }, 
-      {
-        icon: <BellIcon {...icon} />,
-        name: "  محل خدمت",
-        path: "/workspace",
-        element: <Workspace />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "سوالات متداول",
-        path: "/faq",
-        element: <Faq />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "ارسال اعلانات",
-        path: "/notification",
-        element: <Notif />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: " درباره ما ",
-        path: "/abouts",
-        element: <About />,
-      },
-    ],
-  },
-  {
-    title: "صفحات احراز هویت",
-    layout: "auth",
-    pages: [
-      {
-        icon: <ArrowRightOnRectangleIcon {...icon} />,
-        name: "ثبت نام",
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        icon: <ArrowRightOnRectangleIcon {...icon} />,
-        name: "ورود",
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-      {
-        icon: <UserPlusIcon {...icon} />,
-        name: "فراموشی رمز عبور",
-        path: "/forget",
-        element: <Forget />,
-      },
-      
-    ],
-  },
+            {
+                icon: <UserCircleIcon {...icon} />,
+                name: "پروفایل",
+                path: "/profile/profile",
+                element: <Profile/>,
+            },
+            {
+                icon: <TableCellsIcon {...icon} />,
+                name: "مدیریت کاربران",
+                path: "/users",
+                element: <Users/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "مدیریت آموزش ها",
+                path: "/tutorials",
+                element: <Tutorials/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "مقالات",
+                path: "/articles",
+                element: <Article/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "لیست بیماران",
+                path: "/patient-content",
+                element: <PatientContent/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "ارسالی هوشمند به بیماران",
+                path: "/patient",
+                element: <Patient/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "دسته بندی ها",
+                path: "/categories",
+                element: <Category/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: " پوسترهای آموزشی",
+                path: "/poster",
+                element: <Poster/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "ارسال پیام به کاربر  ",
+                path: "/custom-message",
+                element: <CustomMessage/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "فواید سیستم الکترونیکی ",
+                path: "/benefit",
+                element: <SystemBenefit/>,
+            },
+
+            {
+                icon: <BellIcon {...icon} />,
+                name: "  اهداف سامانه آموزش به بیمار",
+                path: "/systemgoal",
+                element: <SystemGoal/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "اطلاعات بیماران",
+                path: "/patient",
+                element: <PatientContent/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "ویدئوهای آموزشی ",
+                path: "/video",
+                element: <Video/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "  محل خدمت",
+                path: "/workspace",
+                element: <Workspace/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "سوالات متداول",
+                path: "/faq",
+                element: <Faq/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: "ارسال اعلانات",
+                path: "/notification",
+                element: <Notif/>,
+            },
+            {
+                icon: <BellIcon {...icon} />,
+                name: " درباره ما ",
+                path: "/abouts",
+                element: <About/>,
+            },
+        ],
+    },
+    {
+        title: "صفحات احراز هویت",
+        layout: "auth",
+        pages: [
+            {
+                icon: <ArrowRightOnRectangleIcon {...icon} />,
+                name: "ثبت نام",
+                path: "/register",
+                element: <Register/>,
+            },
+            {
+                icon: <ArrowRightOnRectangleIcon {...icon} />,
+                name: "ورود",
+                path: "/sign-in",
+                element: <SignIn/>,
+            },
+            {
+                icon: <UserPlusIcon {...icon} />,
+                name: "فراموشی رمز عبور",
+                path: "/forget",
+                element: <Forget/>,
+            },
+
+        ],
+    },
 ];
 
 export default routes;

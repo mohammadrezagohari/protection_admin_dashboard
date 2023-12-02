@@ -22,7 +22,7 @@ import Sortable from "sortablejs";
 import baseUrl from "@/configs/base-url";
 import { AuthContext } from "@/gard/context/AuthContext";
 
-export function Course() {
+export function PatientContent() {
   const { userToken } = useContext(AuthContext);
   const [patients, setPatients] = useState([]);
   const listRef = useRef(null);
@@ -277,4 +277,4 @@ export function Course() {
   );
 }
 
-export default Course;
+export default PatientContent;

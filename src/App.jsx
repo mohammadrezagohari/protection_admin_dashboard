@@ -11,21 +11,17 @@ import CreateCategory from "./pages/dashboard/category/createCategory";
 
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 import UserPanel from "./pages/dashboard/users/panel";
-// import CreateContact from "./pages/dashboard/contact/createContact";
-import CreateAboutUs from "./pages/dashboard/about/createAbout";
 import { Profile, Users } from "./pages/dashboard";
 import { useContext } from "react";
 import CreateTutorialPage from "./pages/dashboard/tutorials/create-tutorials";
 import Category from "./pages/dashboard/category/category";
 import Tutorials from "./pages/dashboard/Tutorials/Tutorials";
 
-import CreateEducationCover, { CreatePoster } from "./pages/dashboard/poster/createPoster";
 import SystemBenefit from "./pages/dashboard/systemBenefit/systemBenefit";
 import CreateSystemBenefit from "./pages/dashboard/systemBenefit/createSystemBenefit";
 import PatientContent from "./pages/dashboard/patientContent/patientContent";
 import CreatePatientContent from "./pages/dashboard/patientContent/createPatientContent";
 
-import CreateQuestions, { CreateFaq } from "./pages/dashboard/faq/createFaq";
 import Faq from "./pages/dashboard/faq/faq";
 import ShowFaq from "./pages/dashboard/faq/showFaq";
 import Home from "./pages/dashboard/home";
@@ -39,7 +35,6 @@ import Article from "./pages/dashboard/articles/articles";
 import CreateArticle from "./pages/dashboard/articles/createArticle";
 import Workspace from "./pages/dashboard/workspace/workspace";
 import ShowPoster from "./pages/dashboard/poster/showPoster";
-import CreateTutorialsWizard from "./pages/dashboard/tutorials/create-tutorials-wizard";
 import CreateWorkspace from "./pages/dashboard/workspace/createWorkspace";
 import CustomMessage from "./pages/dashboard/customMessage/customMessage";
 import CreateCustomMessage from "./pages/dashboard/customMessage/createCustomMessage";
@@ -48,6 +43,10 @@ import CreateNotif from "./pages/dashboard/notification/createNotif";
 import ShowWorkspace from "./pages/dashboard/workspace/showWorkspace";
 import ShowVideo from "./pages/dashboard/video/showVideo";
 import ShowTutorials from "./pages/dashboard/tutorials/show-tutorials";
+import Patient from "@/pages/dashboard/patient/patient.jsx";
+import CreatePatient from "@/pages/dashboard/patient/create-patient.jsx";
+import CreateFaq from "@/pages/dashboard/faq/createFaq.jsx";
+import CreatePoster from "@/pages/dashboard/poster/createPoster.jsx";
 
 function App() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -84,13 +83,22 @@ function App() {
 
             <Route
               path="/dashboard/patient"
-              element={<PatientContent />}
+              element={<Patient />}
             />
             <Route
               path="/dashboard/patient/create"
+              element={<CreatePatient />}
+            />
+
+            <Route
+              path="/dashboard/patient-content"
+              element={<PatientContent />}
+            />
+            <Route
+              path="/dashboard/patient-content/create"
               element={<CreatePatientContent />}
             />
-           
+
 
             <Route path="/dashboard/systemgoal" element={<SystemGoal />} />
             <Route
