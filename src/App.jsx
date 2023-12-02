@@ -46,6 +46,7 @@ import CreateCustomMessage from "./pages/dashboard/customMessage/createCustomMes
 import Notif from "./pages/dashboard/notification/notification";
 import CreateNotif from "./pages/dashboard/notification/createNotif";
 import ShowWorkspace from "./pages/dashboard/workspace/showWorkspace";
+import ShowBenefits from "./pages/dashboard/systemBenefit/showBenefit";
 
 function App() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -129,6 +130,7 @@ function App() {
             
             <Route path="/dashboard/benefit" element={<SystemBenefit />} />
             <Route path="/dashboard/benefit/create" element={<CreateSystemBenefit />} />
+            <Route path="/dashboard/benefit/show/:id" element={<ShowBenefits />} />
 
 
             <Route
