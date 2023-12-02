@@ -114,7 +114,13 @@ export function CreateArticle() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <div className="h-14 flex items-center">
+              <Typography variant="h6" color="white">
+                ایجاد مقاله  
+              </Typography>
+            </div>
+            <div className="py-5">
             <Link
               to={`/dashboard/articles`}
               className="mr-3"
@@ -123,10 +129,6 @@ export function CreateArticle() {
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-               ایجاد مقاله  
-            </Typography>
           </CardHeader>
           <CardBody className="h-full px-0 pt-0 pb-2">
             <form

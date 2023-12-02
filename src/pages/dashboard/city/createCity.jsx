@@ -103,15 +103,17 @@ export function CreateCity() {
   return (
     <>
       <Card>
-        <div className="py-5">
+        <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+          <div className="h-14 flex justify-center">
+          <Typography variant="h6" color="white">
+            ساخت شهرستان جدید برای {province?.name}
+          </Typography>
+          </div>
+          <div className="py-5">
           <Link to={`/dashboard/provinces`} className="mr-3" style={linkStyle}>
             بازگشت
           </Link>
         </div>
-        <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-          <Typography variant="h6" color="white">
-            ساخت شهرستان جدید برای {province?.name}
-          </Typography>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <form method="post" onSubmit={storeProvince} className="m-6">
