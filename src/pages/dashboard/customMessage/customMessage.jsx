@@ -160,12 +160,12 @@ function CustomMessage() {
                           </Typography>
                         </td> */}
                         <td className={className}>
-                          <Link
+                          {/* <Link
                             // to={`/dashboard/custom-message/show/${cm.id}`}
                             style={linkStyle}
                           >
                             اصلاح
-                          </Link>
+                          </Link> */}
                           <Button
                             onClick={() => deleteDatas(cm.id)}
                             className="bg-red-700 text-white hover:bg-red-800 focus:outline-none"

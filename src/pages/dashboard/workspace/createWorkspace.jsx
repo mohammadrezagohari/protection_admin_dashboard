@@ -49,7 +49,7 @@ export function CreateWorkspace() {
       .then(function (response) {
         console.log("dataresult", response);
         if (response?.data?.status) {
-          toast.success("محل خدمت با موفقیت افز,ده شد!");
+          toast.success("محل خدمت با موفقیت افزوده شد!");
         } else {
           if (response?.data?.success == false) {
             toast(

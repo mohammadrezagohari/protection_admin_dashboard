@@ -152,7 +152,7 @@ export function ShowVideo() {
             </Typography>
             <div className="py-5">
             <Link
-              to={`/dashboard/systemgoal`}
+              to={`/dashboard/video`}
               className="mr-3"
               style={linkStyle}
             >

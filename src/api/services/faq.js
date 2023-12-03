@@ -78,7 +78,7 @@ const auth_header_files = {
 
   export const updateFaq = async (id, values, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
-    const response = await apiClient.patch(
+    const response = await apiClient.post(
       `faq/update/${id}`,
       {
         question:values?.question,
