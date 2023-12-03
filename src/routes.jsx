@@ -132,12 +132,12 @@ export const routes = [
         path: "/notification",
         element: <Notif />,
       },
-      {
-        icon: <BellIcon {...icon} />,
-        name: " درباره ما ",
-        path: "/abouts",
-        element: <About />,
-      },
+      // {
+      //   icon: <BellIcon {...icon} />,
+      //   name: " درباره ما ",
+      //   path: "/abouts",
+      //   element: <About />,
+      // },
     ],
   },
   {
@@ -146,14 +146,8 @@ export const routes = [
     pages: [
       {
         icon: <ArrowRightOnRectangleIcon {...icon} />,
-        name: "ثبت نام",
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        icon: <ArrowRightOnRectangleIcon {...icon} />,
-        name: "ورود",
-        path: "/sign-in",
+        name: "خروج",
+        path: "/sign-out",
         element: <SignIn />,
       },
       {

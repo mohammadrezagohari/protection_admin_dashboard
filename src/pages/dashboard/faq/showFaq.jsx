@@ -107,7 +107,11 @@ export function ShowFaq() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <Typography variant="h6" color="white" className="flex h-14 items-center">
+              ارسال سوال  
+            </Typography>
+            <div className="py-5">
             <Link
               to={`/dashboard/faq`}
               className="mr-3"
@@ -116,18 +120,14 @@ export function ShowFaq() {
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ارسال سوال  
-            </Typography>
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form
             method="post"
               onSubmit={handleSubmit}
-              className="m-6 mt-0 mb-4  grid grid-cols-2 gap-x-6"
+              className="flex flex-col m-6 mt-0 mb-4 "
             >
-             <div className="w-full">
+             <div className="w-1/2 mt-6">
                 <label className="ml-3">  عنوان سوال </label>
                 <input
                   onChange={(e) => {
@@ -143,7 +143,7 @@ export function ShowFaq() {
                 />
                 
               </div>
-              <div className="w-full h-full ">
+              <div className="w-1/2 mt-6 ">
                 <label className=""> توضیحات  </label>
                 <textarea
                   onChange={(e) => {

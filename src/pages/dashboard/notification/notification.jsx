@@ -34,6 +34,7 @@ function Notif() {
       .then(function (result) {
         console.log("response", result);
         setNotif(result?.data);
+        console.log("notifssssssssssssssssssssssssss",result?.data)
       })
       .catch(function (err) {
         console.log("error", err);
@@ -114,7 +115,7 @@ function Notif() {
               <table className="w-full min-w-[640px] table-auto text-right">
                 <thead>
                   <tr>
-                    {["#"," موضوع",'محتوا ','وضعیت ',"تنظیمات", ].map((el) => (
+                    {["#","عنوان","تنظیمات", ].map((el) => (
                       <th
                         key={el}
                         className="place-items-center border-b 	 border-blue-gray-50 py-3 px-5 "
@@ -146,26 +147,11 @@ function Notif() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            { ` ${notification.subject}` }
+                            { ` ${notification.title}` }
                           </Typography>
                         </td>
+                     
                         <td className={className}>
-                          <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
-                          { ` ${notification.status}` }
-                          </Typography>
-                        </td>
-                        <td className={className}>
-                          <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
-                          { ` ${notification.status}` }
-                          </Typography>
-                        </td>
-                        <td className={className}>
-                          <Link
-                            // to={`/dashboard/notification/show/${notification.id}`}
-                            style={linkStyle}
-                          >
-                            اصلاح
-                          </Link>
                           <Button
                             onClick={() => deleteDatas(notification.id)}
                             className="bg-red-700 text-white hover:bg-red-800 focus:outline-none"

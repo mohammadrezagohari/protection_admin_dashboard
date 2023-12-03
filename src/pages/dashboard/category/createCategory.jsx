@@ -111,7 +111,13 @@ export function CreateCategory() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <div className="h-14 flex items-center">
+              <Typography variant="h6" color="white">
+                ساخت دسته بندی جدید
+              </Typography>
+            </div>
+            <div className="py-5">
             <Link
               to={`/dashboard/categories`}
               className="mr-3"
@@ -120,10 +126,6 @@ export function CreateCategory() {
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ساخت دسته بندی جدید
-            </Typography>
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form

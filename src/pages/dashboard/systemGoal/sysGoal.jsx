@@ -119,7 +119,7 @@ function SystemGoal() {
               <table className="w-full min-w-[640px] table-auto text-right">
                 <thead>
                   <tr>
-                    {["#"," عنوان",'توضیحات', "تنظیمات", ].map((el) => (
+                    {["#"," عنوان", "تنظیمات", ].map((el) => (
                       <th
                         key={el}
                         className="place-items-center border-b 	 border-blue-gray-50 py-3 px-5 "
@@ -155,11 +155,11 @@ function SystemGoal() {
                           { ` ${goal.title}` }
                           </Typography>
                         </td>
-                        <td className={className}>
+                        {/* <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
                           { ` ${goal.description}` }
                           </Typography>
-                        </td>
+                        </td> */}
                         <td className={className}>
                           <Link
                             to={`/dashboard/systemgoal/show/${goal.id}`}

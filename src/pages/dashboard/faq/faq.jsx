@@ -114,7 +114,7 @@ function Faq() {
               <table className="w-full min-w-[640px] table-auto text-right">
                 <thead>
                   <tr>
-                    {["#"," سوال",'توضیحات', "تنظیمات", ].map((el) => (
+                    {["#"," سوال", "تنظیمات", ].map((el) => (
                       <th
                         key={el}
                         className="place-items-center border-b 	 border-blue-gray-50 py-3 px-5 "
@@ -149,11 +149,11 @@ function Faq() {
                             { ` ${faq.question}` }
                           </Typography>
                         </td>
-                        <td className={className}>
+                        {/* <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600 max-w-8">
                           { ` ${faq.description}` }
                           </Typography>
-                        </td>
+                        </td> */}
                         <td className={className}>
                           <Link
                             to={`/dashboard/faq/show/${faq.id}`}

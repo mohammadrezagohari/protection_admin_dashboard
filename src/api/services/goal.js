@@ -86,7 +86,7 @@ export const createGoal = async (values,userToken) => {
         description: values.description,
       })
       const requestOptions = {
-        method: 'PATCH',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'

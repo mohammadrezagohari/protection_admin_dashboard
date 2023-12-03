@@ -53,7 +53,7 @@ export const showNotification = async (id,userToken)=>{
 export const createNotification = async (values,userToken) => {
  myHeaders.append("Authorization", `Bearer ${userToken}`);
    const raw = JSON.stringify({
-     subject:values.subject,
+     title:values.title,
      context:values.context,
      status:values.status,
    })

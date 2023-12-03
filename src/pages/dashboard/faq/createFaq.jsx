@@ -95,7 +95,13 @@ export function CreateFaq() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <div className="h-14 flex items-center">
+              <Typography variant="h6" color="white">
+                ارسال سوال  
+              </Typography>
+            </div>
+            <div className="py-5">
             <Link
               to={`/dashboard/faq`}
               className="mr-3"
@@ -104,19 +110,15 @@ export function CreateFaq() {
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ارسال سوال  
-            </Typography>
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form
               method="post"
               onSubmit={handleSubmit}
-              className="m-6 mt-0 mb-4  grid grid-cols-2 gap-x-6"
+              className="m-6 mt-0 mb-4  flex flex-col gap-x-6"
             >
-             <div className="w-full">
-                <label className="ml-3">  عنوان سوال </label>
+             <div className="w-1/2">
+                <label className="ml-3 mt-6">  عنوان سوال </label>
                 <input
                   onChange={(e) => {
                     setQuestion(e.currentTarget.value);
@@ -131,7 +133,7 @@ export function CreateFaq() {
                 />
                 
               </div>
-              <div className="w-full  ">
+              <div className="w-1/2 mt-6  ">
                 <label className=""> توضیحات  </label>
                 <textarea
                   onChange={(e) => {

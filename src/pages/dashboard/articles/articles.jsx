@@ -53,7 +53,7 @@ function Article() {
         marginLeft: "1rem",
         padding: "0.5rem",
         borderRadius: "8px",
-    };
+    }; 
 
     const deleteArticles = async (id) => {
         const deleteResult = await deleteArticle(id, userToken)
@@ -155,12 +155,12 @@ function Article() {
                                                 </Typography>
                                             </td>
                                             <td className={className}>
-                                                {/*<Link*/}
-                                                {/*    // to={`/dashboard/faq/show/${article.id}`}*/}
-                                                {/*    style={linkStyle}*/}
-                                                {/*>*/}
-                                                {/*    اصلاح*/}
-                                                {/*</Link>*/}
+                                                <Link 
+                                                    to={`/dashboard/articles/show/${article.id}`}
+                                                   style={linkStyle}
+                                                >
+                                                    اصلاح
+                                                </Link>
                                                 <Button
                                                     onClick={() => deleteArticles(article.id)}
                                                     className="bg-red-700 text-white hover:bg-red-800 focus:outline-none"

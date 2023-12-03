@@ -101,19 +101,21 @@ export function CreateCustomMessage() {
         </div>
       ) : (
         <Card style={{height:"570px"}}>
-          <div className="py-5">
-            <Link
-              to={`/dashboard/custom-message`}
-              className="mr-3"
-              style={linkStyle}
-            >
-              بازگشت
-            </Link>
-          </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+           <div className="h-14 flex items-center">
             <Typography variant="h6" color="white">
-              ارسال پیام   
-            </Typography>
+                ارسال پیام   
+              </Typography>
+           </div>
+            <div className="py-5">
+              <Link
+                to={`/dashboard/custom-message`}
+                className="mr-3"
+                style={linkStyle}
+              >
+                بازگشت
+              </Link>
+            </div>
           </CardHeader>
           <CardBody className="h-full px-0 pt-0 pb-2">
             <form

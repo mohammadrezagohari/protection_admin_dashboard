@@ -49,7 +49,7 @@ export function CreateWorkspace() {
       .then(function (response) {
         console.log("dataresult", response);
         if (response?.data?.status) {
-          toast.success("محل خدمت با موفقیت افز,ده شد!");
+          toast.success("محل خدمت با موفقیت افزوده شد!");
         } else {
           if (response?.data?.success == false) {
             toast(
@@ -95,7 +95,11 @@ export function CreateWorkspace() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <Typography variant="h6" color="white" className="h-14 flex items-center">
+              ایجاد محل خدمت
+            </Typography>
+            <div className="py-5">
             <Link
               to={`/dashboard/workspace`}
               className="mr-3"
@@ -104,10 +108,6 @@ export function CreateWorkspace() {
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ایجاد محل خدمت
-            </Typography>
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form

@@ -121,7 +121,13 @@ export function CreatePoster() {
         </div>
       ) : (
         <Card>
-          <div className="py-5">
+          <CardHeader variant="gradient" color="blue" className="flex justify-between mb-8 mt-3 p-6">
+            <div className="h-14 flex items-center">
+              <Typography variant="h6" color="white">
+                ساخت پوستر جدید
+              </Typography>
+            </div>
+            <div className="py-5">
             <Link
               to={`/dashboard/poster`}
               className="mr-3"
@@ -130,10 +136,6 @@ export function CreatePoster() {
               بازگشت
             </Link>
           </div>
-          <CardHeader variant="gradient" color="blue" className="mb-8 mt-3 p-6">
-            <Typography variant="h6" color="white">
-              ساخت پوستر جدید
-            </Typography>
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form

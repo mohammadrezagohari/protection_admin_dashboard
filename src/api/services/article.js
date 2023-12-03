@@ -27,8 +27,8 @@ export const getArticle = async (userToken) => {
 export const showArticle = async (id, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
 
-    const response = await apiClient.get(`/tutorial/article/${id}`, {
-        headers: header,
+    const response = await apiClient.get(`/article/show/${id}`, {
+        headers: auth_header_files,
     });
     console.log("status", response);
     if (response.status !== 200) {
@@ -38,15 +38,16 @@ export const showArticle = async (id, userToken) => {
 }
 
 export const createArticle = async (values, userToken) => {
+    auth_header_files.Authorization = `Bearer ${userToken}`;
     const {data} = await apiClient.post(`article/store`, {
         title: values.title,
         context: JSON.stringify(values.context),
         category_id: values.category_id,
         image: values.image,
-    }, {
+    },{
         headers: {
-            "Content-Type": "multipart/form-data", Authorization: `Bearer ${userToken}`,
-        },
+            auth_header_files,
+        }
     })
         .then((response) => {
             if (response.status !== 200) {
@@ -61,18 +62,23 @@ export const createArticle = async (values, userToken) => {
 
 export const updateArticle = async (id, values, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
-    const response = await apiClient.post(`article/update/${id}`,
-
-        {
-            headers: header,
-        }, {
-            title: values.title, context: JSON.stringify(values.context), category_id: values.category_id,
-        });
-    if (response.status !== 200) {
-        return null;
+    const response = await apiClient.post(
+      `article/update/${id}`,
+      {
+        title: values.title,
+        context: JSON.stringify(values.context),
+        category_id: values.category_id,
+        image: values.image,
+      },
+      {
+        headers: auth_header_files,
+      }
+    );
+    if (!response.status) {
+      return null;
     }
     return response?.data;
-};
+  };
 
 
 export const deleteArticle = async (id, userToken) => {

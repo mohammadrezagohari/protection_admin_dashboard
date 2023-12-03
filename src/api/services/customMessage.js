@@ -82,7 +82,7 @@ export const createCustomMessage = async (values,userToken) => {
         context:values.context,
      })
      const requestOptions = {
-       method: 'PATCH',
+       method: 'POST',
        headers: myHeaders,
        body: raw,
        redirect: 'follow'
