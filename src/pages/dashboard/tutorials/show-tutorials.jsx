@@ -157,6 +157,7 @@ export function ShowTutorials() {
                         <CategoryDropdown
                             category={category}
                             setCategory={setCategory}
+                            selected_id={category}
                         />
                     </div>
 
