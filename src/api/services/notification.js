@@ -21,7 +21,7 @@ export const getNotification = async (userToken) => {
     redirect: "follow",
   };
   let mainResult = null;
-  await fetch(`${baseUrl}/api/custom-message`, requestOptions)
+  await fetch(`${baseUrl}/api/notification`, requestOptions)
     .then((response) => response.text())
     .then((result) => {
       mainResult = result;
@@ -53,7 +53,7 @@ export const showNotification = async (id,userToken)=>{
 export const createNotification = async (values,userToken) => {
  myHeaders.append("Authorization", `Bearer ${userToken}`);
    const raw = JSON.stringify({
-     title:values.title,
+     subject:values.subject,
      context:values.context,
      status:values.status,
    })

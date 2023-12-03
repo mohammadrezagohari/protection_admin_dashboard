@@ -16,7 +16,7 @@ const CategoryDropdown = ({ category, setCategory, selected_id = null }) => {
     function () {
       if (!isLoading && !isError) {
         const collection = data?.data;
-        const slItem = collection.filter((c) => c?.id == selected_id);
+        const slItem = collection.find((c) => c?.id == selected_id);
         if (slItem) {
           setSelected({
             value: slItem.id,

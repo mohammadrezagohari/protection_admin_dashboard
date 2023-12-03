@@ -43,27 +43,27 @@ const WorkspaceDropdown = ({
         return editResult;
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         getWorkspaces();
-
-    },[city_id])
+    }, [city_id])
 
     if (loading) {
         return <div>در حال بارگذاری...</div>;
     }
-      if (!collection) {
-          console.log('collection',collection)
-          return <div>در حال پردازش...</div>;
-      }
-      if (!workspace) {
-        return <div>Loading...</div>;
-          console.log("NOOK")
-
-      }else{
-          console.log("OK workspace",workspace)
-          console.log("OK selected",selected)
-
-      }
+    if (!collection) {
+        console.log('collection', collection)
+        return <div>در حال پردازش...</div>;
+    }
+    // if (!workspace) {
+    //     console.log('collection',collection)
+    //     return <div>Loading...</div>;
+    //     console.log("NOOK")
+    //
+    // } else {
+    //     console.log("OK workspace", workspace)
+    //     console.log("OK selected", selected)
+    //
+    // }
     return (
         <div className="relative h-10 w-full min-w-[200px]">
             <Select

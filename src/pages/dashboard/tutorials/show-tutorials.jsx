@@ -67,7 +67,7 @@ export function ShowTutorials() {
         }, id, userToken)
             .then(function (response) {
                 if (response.status) {
-                    toast.success(" دسته بندی با موفقیت افزوده شد !");
+                    toast.success("عملیات با موفقیت انجام شد");
                 } else {
                     if (response?.success == false) {
                         toast(`${response?.data?.main_title != undefined ? response?.data?.main_title : ""} \n 
@@ -92,16 +92,20 @@ export function ShowTutorials() {
         return updateResult;
     };
     useEffect(() => {
+    console.log('data.data',data)
+    console.log('change')
         setImage(data?.data?.main_image);
+        setMainTitle(data?.data?.main_title);
         setFirstTitle(data?.data?.first_title);
         setFirstContext(data?.data?.first_context);
         setSecondTitle(data?.data?.second_title);
         setSecondContext(data?.data?.second_context);
         setCategory(data?.data?.category?.id);
+        setImagePreview(data?.data?.main_image)
         if (loading) {
             setLoading(false);
         }
-    }, []);
+    }, [isLoading]);
 
     if (isLoading || error) {
         return (
@@ -168,7 +172,7 @@ export function ShowTutorials() {
                             onChange={(e) => setMainTitle(e.target.value)}
                             name="main_title"
                             size="md"
-                            // value={values.city_id}
+                            value={mainTitle}
                             //   label="عنوان ثانویه اول (حین بستری)"
                         />
                     </div>
@@ -180,7 +184,7 @@ export function ShowTutorials() {
                             onChange={(e) => setFirstTitle(e.target.value)}
                             name="first_title"
                             size="md"
-                            // value={values.city_id}
+                            value={firstTitle}
                             label="عنوان ثانویه اول (حین بستری)"
                         />
                     </div>
@@ -200,7 +204,7 @@ export function ShowTutorials() {
                             onChange={(e) => setSecondTitle(e.target.value)}
                             name="second_title"
                             size="md"
-                            // value={values.second_title}
+                            value={secondTitle}
                             label="عنوان ثانویه دو (حین ترخیص)"
                         />
                     </div>
@@ -227,7 +231,7 @@ export function ShowTutorials() {
                             <div className=" h-20 w-36 rounded-md border-2">
                                 <img
                                     className="h-full w-full rounded-md object-cover"
-                                    src={imagePreview ?? "../../images/no-image.svg"}
+                                    src={imagePreview ?? "../../../images/no-image.svg"}
                                     alt="آپلود عکس"
                                 />
                             </div>

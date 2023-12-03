@@ -54,7 +54,7 @@ export function CreateNotif() {
     e.preventDefault();
     const createResult = await createNotification(
       {
-        title: title,
+        subject: title,
         context:context,
         status:status,
       },
@@ -63,7 +63,6 @@ export function CreateNotif() {
         console.log('dataresult', response)
         if (response.status) {
           toast.success("اعلان با موفقیت ارسال شد !");
-          toast.success(response?.data?.context);
         } else {
           if (response?.success == false) {
             toast(

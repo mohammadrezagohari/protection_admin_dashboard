@@ -65,7 +65,7 @@ export function EditUser() {
         const showResult = await showUser(id, userToken)
             .then(function (response) {
                 setImagePreview(`${baseUrl}${response?.data?.avatar}`);
-                setAvatar(`${baseUrl}/${response?.data?.avatar}`);
+                // setAvatar(`${baseUrl}/${response?.data?.avatar}`);
                 setFirstname(response?.data?.first_name);
                 setLastname(response?.data?.last_name);
                 setMobile(response?.data?.mobile);
@@ -306,7 +306,7 @@ export function EditUser() {
                                         <div className=" h-20 w-36 rounded-md border-2">
                                             <img
                                                 className="h-full w-full rounded-md object-cover"
-                                                src={imagePreview ?? "../../images/no-image.svg"}
+                                                src={imagePreview ?? "../../../images/no-image.svg"}
                                                 alt="آپلود عکس"
                                             />
                                         </div>

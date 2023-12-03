@@ -147,7 +147,7 @@ function Notif() {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            { ` ${notification.title}` }
+                            { ` ${notification.subject}` }
                           </Typography>
                         </td>
                      

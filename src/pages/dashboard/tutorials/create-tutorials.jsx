@@ -52,9 +52,6 @@ export function CreateTutorialPage() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const file_url = URL.createObjectURL(file);
-    console.log("file", file);
-    console.log("file_url", file_url);
-    console.log("image target", event.target.files[0]);
     setImage(event.target.files[0]);
     setImagePreview(file_url);
   };
@@ -74,9 +71,8 @@ export function CreateTutorialPage() {
       userToken
     )
       .then(function (response) {
-        console.log("dataresult", response);
         if (response.status) {
-          toast.success(" دسته بندی با موفقیت افزوده شد !");
+          toast.success("عملیات با موفقیت انجام شد");
         } else {
           if (response?.success == false) {
             toast(
@@ -95,12 +91,10 @@ export function CreateTutorialPage() {
           }
           toast.error("خطایی رخ داده است");
         }
-        console.log(response);
       })
       .catch(function (error) {
         toast.error("خطا !! مجددا تلاش نمایید");
         console.log("error :", error);
-        console.log(data);
       });
 
     return createResult;

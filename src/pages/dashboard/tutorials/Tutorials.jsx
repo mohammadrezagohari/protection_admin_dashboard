@@ -34,7 +34,6 @@ function Tutorials() {
   useEffect(() => {
     setTimeout(() => {
      getTutorials().then((current) => {
-        console.log("current",current);
         setTutorials(current?.data);
      });
       setLoading(false);

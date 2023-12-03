@@ -80,13 +80,24 @@ export const updateUser = async (id, values, userToken) => {
     }
     return response?.data;
 };
+export const storeUser = async (values, userToken) => {
+    auth_header_files.Authorization = `Bearer ${userToken}`;
+    const response = await apiClient.post(`user/store`, {
+        "avatar": values.avatar,
+        "first_name": values.first_name,
+        "last_name": values.last_name,
+        "mobile": values.mobile,
+        "is_enable": values.is_enable,
+        "workspace_id": values.workspace,
+        "city_id": values.city_id,
+        "sex": values.sex,
+        "password": values.password
+    }, {
+        headers: auth_header_files,
+    });
+    if (response.status !== 200) {
+        return null;
+    }
+    return response?.data;
+};
 
-// const fetchUser = async (userId) => {
-//   const response = await apiClient.get("/profile/me"); // Replace with your API endpoint
-
-//   if (response.status !== 200) {
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   return response.data;
-// };
