@@ -104,11 +104,9 @@ export const profileProvince = async (userToken) => {
     return data;
 };
 
-export const logOut = async (field, userToken) => {
+export const logOut = async (userToken) => {
     auth_header.Authorization = `Bearer ${userToken}`;
-    const response = await apiClient.post(`/field/store`, {
-        name: field,
-    }, {
+    const response = await apiClient.post(`/logout`, {}, {
         headers: auth_header,
     });
     if (response.status !== 200) {

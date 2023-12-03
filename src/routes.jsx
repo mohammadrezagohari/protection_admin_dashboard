@@ -33,6 +33,7 @@ import Notif from "./pages/dashboard/notification/notification";
 import Patient from "@/pages/dashboard/patient/patient.jsx";
 import Hospital from "./pages/dashboard/hospital/hospital";
 import UsersList from '@/pages/dashboard/users.jsx';
+import Logout from "@/pages/auth/logout.jsx";
 
 const icon = {
     className: "w-5 h-5 text-inherit",
@@ -154,8 +155,8 @@ export const routes = [
             {
                 icon: <ArrowRightOnRectangleIcon {...icon} />,
                 name: "خروج",
-                path: "/sign-out",
-                element: <SignIn/>,
+                path: "/logout",
+                element: <Logout/>,
             },
             // {
             //   icon: <UserPlusIcon {...icon} />,

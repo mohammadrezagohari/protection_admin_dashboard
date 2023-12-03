@@ -53,6 +53,7 @@ import CreateHospital from "./pages/dashboard/hospital/create-hospital";
 import ShowHospital from "./pages/dashboard/hospital/showHospital";
 import ShowArticle from "./pages/dashboard/articles/showArticle";
 import CreateNewUser from "@/pages/dashboard/users/create.jsx";
+import Logout from "@/pages/auth/logout.jsx";
 
 function App() {
     const [controller, dispatch] = useMaterialTailwindController();
@@ -70,6 +71,7 @@ function App() {
             <>
                 <Dashboard>
                     <Routes>
+                        <Route path="/auth/logout" element={<Logout/>}/>
                         <Route path="/dashboard/users" element={<UsersList/>}/>
                         <Route path="/dashboard/users/create" element={<CreateNewUser/>}/>
                         <Route path="/dashboard/users/edit/:id" element={<EditUser/>}/>
