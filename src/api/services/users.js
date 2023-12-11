@@ -18,20 +18,15 @@ const auth_header_files = {
     "Accept": "application/json, text/plain, */*"
 };
 export const fetchUsers = async (userToken) => {
-    myHeaders.append("Authorization", `Bearer ${userToken}`);
-    var requestOptions = {
-        method: "get",
-        headers: myHeaders,
-        redirect: "follow",
-    };
-    let mainResult = null;
-    await fetch(`${baseUrl}/api/user`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-            mainResult = result;
-        })
-        .catch((error) => console.log("error", error));
-    return JSON.parse(mainResult);
+    const count = 3;
+    auth_header.Authorization = `Bearer ${userToken}`;
+    const response = await apiClient.get(`/user?count=${count}`, {
+        headers: auth_header,
+    });
+    if (response.status !== 200) {
+        return null;
+    }
+    return response?.data;
 };
 
 

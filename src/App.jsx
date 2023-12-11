@@ -54,6 +54,7 @@ import ShowHospital from "./pages/dashboard/hospital/showHospital";
 import ShowArticle from "./pages/dashboard/articles/showArticle";
 import CreateNewUser from "@/pages/dashboard/users/create.jsx";
 import Logout from "@/pages/auth/logout.jsx";
+import ShowCategory from "@/pages/dashboard/category/showCategory.jsx";
 
 function App() {
     const [controller, dispatch] = useMaterialTailwindController();
@@ -84,6 +85,10 @@ function App() {
                         <Route
                             path="/dashboard/category/create"
                             element={<CreateCategory/>}
+                        />
+                        <Route
+                            path="/dashboard/category/show/:id"
+                            element={<ShowCategory/>}
                         />
 
                         <Route path="/dashboard/articles" element={<Article/>}/>
@@ -180,13 +185,13 @@ function App() {
 
                         <Route path="/dashboard/notification" element={<Notif/>}/>
                         <Route path="/dashboard/notification/create" element={<CreateNotif/>}/>
-                        <Route path="/" element={<Home/>}/>
 
 
                         <Route path="/dashboard/hospital" element={<Hospital/>}/>
                         <Route path="/dashboard/hospital/create" element={<CreateHospital/>}/>
                         <Route path="/dashboard/hospital/show/:id" element={< ShowHospital/>}/>
 
+                        <Route path="/*" element={<Home/>}/>
                     </Routes>
                 </Dashboard>
             </>

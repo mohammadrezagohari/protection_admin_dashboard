@@ -1,9 +1,14 @@
 import { useQuery } from "react-query";
 import apiClient from "../apiClient";
 
+const auth_header = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+};
+
 const auth_header_files = {
-  "Content-Type": "multipart/form-data",
-  Accept: "application/json",
+    "Content-Type": "multipart/form-data",
+    Accept: "application/json",
 };
 
 export const getHospital = async (userToken) => {

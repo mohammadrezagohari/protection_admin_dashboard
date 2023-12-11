@@ -106,7 +106,7 @@ export const routes = [
 
             {
                 icon: <BellIcon {...icon} />,
-                name: "  اهداف سامانه آموزش به بیمار",
+                name: " اهداف آموزش به بیمار",
                 path: "/systemgoal",
                 element: <SystemGoal/>,
             },

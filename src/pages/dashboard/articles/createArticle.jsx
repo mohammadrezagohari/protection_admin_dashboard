@@ -51,6 +51,7 @@ export function CreateArticle() {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const createResult = await createArticle(
       {
@@ -61,9 +62,8 @@ export function CreateArticle() {
       },
        userToken)
       .then(function (response) {
-        console.log('dataresult', response)
         if (response.status) {
-          toast.success(" مقاله با موفقیت درج شد!   !");
+          toast.success("مقاله با موفقیت درج شد!");
         } else {
           if (response?.success == false) {
             toast(

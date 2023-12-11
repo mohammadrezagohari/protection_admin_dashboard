@@ -44,10 +44,8 @@ export const createArticle = async (values, userToken) => {
         context: JSON.stringify(values.context),
         category_id: values.category_id,
         image: values.image,
-    },{
-        headers: {
-            auth_header_files,
-        }
+    }, {
+        headers: auth_header_files,
     })
         .then((response) => {
             if (response.status !== 200) {
@@ -63,26 +61,26 @@ export const createArticle = async (values, userToken) => {
 export const updateArticle = async (id, values, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
     const response = await apiClient.post(
-      `article/update/${id}`,
-      {
-        title: values.title,
-        context: JSON.stringify(values.context),
-        category_id: values.category_id,
-        image: values.image,
-      },
-      {
-        headers: auth_header_files,
-      }
+        `article/update/${id}`,
+        {
+            title: values.title,
+            context: JSON.stringify(values.context),
+            category_id: values.category_id,
+            image: values.image,
+        },
+        {
+            headers: auth_header_files,
+        }
     );
     if (!response.status) {
-      return null;
+        return null;
     }
     return response?.data;
-  };
+};
 
 
 export const deleteArticle = async (id, userToken) => {
-    auth_header_files.Authorization = `Bearer ${userToken}`;
+    header.Authorization = `Bearer ${userToken}`;
     const response = await apiClient.delete(`article/delete/${id}`, {
         headers: header,
     });

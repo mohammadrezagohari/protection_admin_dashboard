@@ -6,8 +6,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-    font-family: "Vazir";
+h6,body {
+    font-family: 'Vazir', sans-serif;
 }
 
 .relative.w-full.min-w-\[200px\].h-10 {

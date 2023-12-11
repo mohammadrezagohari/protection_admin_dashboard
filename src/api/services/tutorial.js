@@ -67,55 +67,54 @@ export const createTutorials = async (values, userToken) => {
 
 };
 
-export const createTutorialsStep01 = (values, userToken) => {
-    auth_header_files.Authorization = `Bearer ${userToken}`;
-    const response = apiClient
-        .post(
-            `/tutorial/store_step01`,
-            {
-                main_title: values.main_title,
-                first_title: values.first_title,
-                first_context: values.first_context,
-                main_image: values.main_image,
-                category_id: values.category_id,
-            },
-            {
-                headers: auth_header_files,
-            }
-        )
-        .then((response) => {
-            if (response.status !== 200) {
-                return null;
-            }
-            return response;
-        });
-    return response;
-};
-
-export const createTutorialsStep02 = (values, userToken) => {
-    auth_header_files.Authorization = `Bearer ${userToken}`;
-    const response = apiClient
-        .post(
-            `/tutorial/store_step02`,
-            {
-                id: values.id,
-                second_title: values.second_title,
-                second_context: values.second_context,
-            },
-            {
-                headers: auth_header_files,
-            }
-        )
-        .then((response) => {
-            if (response.status !== 200) {
-                return null;
-            }
-            return response;
-        });
-    return response;
-};
-
-// ----------------------------------------------------------------------------
+// export const createTutorialsStep01 = (values, userToken) => {
+//     auth_header_files.Authorization = `Bearer ${userToken}`;
+//     const response = apiClient
+//         .post(
+//             `/tutorial/store_step01`,
+//             {
+//                 main_title: values.main_title,
+//                 first_title: values.first_title,
+//                 first_context: values.first_context,
+//                 main_image: values.main_image,
+//                 category_id: values.category_id,
+//             },
+//             {
+//                 headers: auth_header_files,
+//             }
+//         )
+//         .then((response) => {
+//             if (response.status !== 200) {
+//                 return null;
+//             }
+//             return response;
+//         });
+//     return response;
+// };
+//
+// export const createTutorialsStep02 = (values, userToken) => {
+//     auth_header_files.Authorization = `Bearer ${userToken}`;
+//     const response = apiClient
+//         .post(
+//             `/tutorial/store_step02`,
+//             {
+//                 id: values.id,
+//                 second_title: values.second_title,
+//                 second_context: values.second_context,
+//             },
+//             {
+//                 headers: auth_header_files,
+//             }
+//         )
+//         .then((response) => {
+//             if (response.status !== 200) {
+//                 return null;
+//             }
+//             return response;
+//         });
+//     return response;
+// };
+//
 
 export const updateTutorials = async (values, id, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
@@ -129,7 +128,7 @@ export const updateTutorials = async (values, id, userToken) => {
             first_context: JSON.stringify(values?.first_context),
             second_title: values?.second_title,
             second_context: JSON.stringify(values?.second_context),
-            image: values?.image,
+            main_image: values?.main_image,
         },{
             headers: auth_header_files,
         },

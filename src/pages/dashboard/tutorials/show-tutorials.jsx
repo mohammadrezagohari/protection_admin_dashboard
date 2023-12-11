@@ -13,6 +13,7 @@ import CKEditorText from "@/components/base/ckeditor/ckeditor";
 import {useQuery} from "react-query";
 
 export function ShowTutorials() {
+    const {id} = useParams();
     const {userToken} = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState(null);
@@ -38,7 +39,6 @@ export function ShowTutorials() {
         backgroundColor: "purple", color: "white", marginLeft: "1rem", padding: "0.5rem", borderRadius: "8px",
     };
 
-    const {id} = useParams();
 
 
     const {data, isError, isLoading, error} = useQuery(["tutorial_item", id], () => showTutorials(id));
@@ -54,7 +54,6 @@ export function ShowTutorials() {
     };
 
     const storeTutorial = async (e) => {
-        console.log('id', id)
         e.preventDefault();
         const updateResult = await updateTutorials({
             main_title: mainTitle,
@@ -106,7 +105,7 @@ export function ShowTutorials() {
             setLoading(false);
         }
     }, [isLoading]);
-
+    console.log('category',category)
     if (isLoading || error) {
         return (
             <div className="flex items-center justify-center py-60">
