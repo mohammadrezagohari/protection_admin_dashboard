@@ -12,12 +12,12 @@ import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
 import CategoryDropdown from "@/components/category-dropdown/category-dropdown";
 import { getArticle,createArticle } from "@/api/services/article";
-import CKEditorText from "@/components/base/ckeditor/ckeditor.jsx";
+import CKEditorText from "@/components/base/ckeditor/ckeditor";
 
 export function CreateArticle() {
   const { userToken } = useContext(AuthContext);
   const [title,setTitle] = useState([]);
-  const [context,setContext] = useState([]);
+  const [context,setContext] = useState(null);
   const [category_id,setCategory_id] = useState([]);
   const editorRef = useRef(null);
   const [loading, setLoading] = useState(true);
@@ -51,7 +51,6 @@ export function CreateArticle() {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     const createResult = await createArticle(
       {

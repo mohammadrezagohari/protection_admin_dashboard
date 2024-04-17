@@ -48,6 +48,7 @@ export const createTutorials = async (values, userToken) => {
             second_title: values?.second_title,
             second_context: JSON.stringify(values?.second_context),
             main_image: values.main_image,
+            icd_code: values.icd_code,
             category_id: values.category_id,
         },
         {
@@ -128,6 +129,7 @@ export const updateTutorials = async (values, id, userToken) => {
             first_context: JSON.stringify(values?.first_context),
             second_title: values?.second_title,
             second_context: JSON.stringify(values?.second_context),
+            icd_code: values.icd_code,
             main_image: values?.main_image,
         },{
             headers: auth_header_files,
@@ -139,10 +141,10 @@ export const updateTutorials = async (values, id, userToken) => {
     return response?.data;
 };
 
-export const deleteTutorilas = async (id, userToken) => {
+export const deleteCurrentTutorial = async (id, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
     const response = await apiClient.delete(`/tutorial/delete/${id}`, {
-        headers: header,
+        headers: auth_header_files,
     });
     if (response.status !== 200) {
         return null;

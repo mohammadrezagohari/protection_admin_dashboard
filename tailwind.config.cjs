@@ -14,7 +14,7 @@ module.exports = withMT({
       },
     },
     fontFamily:{
-        sans: ['vazir',"Roboto", "sans-serif"],
+        sans: ['yekan-num',"Roboto", "sans-serif"],
     }
   },
   plugins: [],

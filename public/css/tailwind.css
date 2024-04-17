@@ -1,3 +1,4 @@
+@import '../../src/assets/fonts/yekan-bakh/yekan-bakh.css'; /* This has your @font-face definition */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

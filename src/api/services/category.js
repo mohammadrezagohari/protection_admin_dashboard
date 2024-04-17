@@ -13,7 +13,7 @@ const auth_header_files = {
 };
 
 
-export const getCategorysList = async (count = 10) => {
+export const getCategorysList = async (count = 50) => {
     const response = await apiClient.get(`/category?count=${count}`, {
         headers: auth_header,
     });
@@ -28,7 +28,7 @@ var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 myHeaders.append("Accept", "application/json");
 
-export const getCategory = async (count = 10, userToken = null) => {
+export const getCategory = async (count = 50, userToken = null) => {
     auth_header.Authorization = `Bearer ${userToken}`;
     const response = await apiClient.get(`/category?count=${count}`, {
         headers: auth_header,

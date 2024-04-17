@@ -14,10 +14,10 @@ export function Logout() {
     // Default
     const DefaultNotify = () => toast("بدرود تا درود دیگر");
 
-    // // Success
+    // Success
     // const SuccessNotify = () => toast.success("با موفقیت ثبت شد !");
-    //
-    // // Error
+
+    // Error
     // const ErrorNotify = () => toast.error("لطفا اطلاعات ضروری را وارد نمایید !!");
 
     useEffect(() => {

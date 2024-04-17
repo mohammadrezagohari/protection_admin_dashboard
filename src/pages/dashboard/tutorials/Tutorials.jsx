@@ -16,7 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
 import { AuthContext } from "@/gard/context/AuthContext";
-import { deleteTutorilas, getTutorials } from "@/api/services/tutorial";
+import { deleteCurrentTutorial, getTutorials } from "@/api/services/tutorial";
 // import DataTable from "react-data-table-component";
 // import { ThreeDots } from "react-loader-spinner";
 import { useQuery } from "react-query";
@@ -46,6 +46,25 @@ function Tutorials() {
     marginLeft: "1rem",
     padding: "0.5rem",
     borderRadius: "8px",
+  };
+
+
+  const deleteTutorialItem = async (id) => {
+    const deleteResult = await deleteCurrentTutorial(id, userToken)
+      .then(function (response) {
+        if (response.status) {
+          toast.success("حذف با موفقیت انجام شد !");
+          setTutorials(tutorials.filter((current) => current.id != id));
+        } else {
+          toast.error("عملیات ناموفق بود!");
+        }
+      })
+      .catch(function (err) {
+        toast.error("خطا !! مجددا تلاش نمایید");
+        console.log("error", err);
+      });
+
+    return deleteResult;
   };
 
   return (
@@ -144,12 +163,15 @@ function Tutorials() {
                           >
                             اصلاح
                           </Link>
-                          {/* <Button
-                            onClick={() => deleteTutorialItem(tutorial.id)}
+                          <Button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                deleteTutorialItem(tutorial.id)
+                            }}
                             className="bg-red-700 text-white hover:bg-red-800 focus:outline-none"
                           >
                             حذف
-                          </Button> */}
+                          </Button>
                         </td>
                       </tr>
                     );

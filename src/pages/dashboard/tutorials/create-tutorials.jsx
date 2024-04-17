@@ -25,6 +25,7 @@ export function CreateTutorialPage() {
   const [firstTitle, setFirstTitle] = useState(null);
   const [firstContext, setFirstContext] = useState(null);
   const [secondTitle, setSecondTitle] = useState(null);
+  const [code, setCode] = useState(null);
   const [secondContext, setSecondContext] = useState(null);
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -66,6 +67,7 @@ export function CreateTutorialPage() {
         second_title: secondTitle,
         second_context: secondContext,
         main_image: image,
+        icd_code: code,
         category_id: category,
       },
       userToken
@@ -145,8 +147,20 @@ export function CreateTutorialPage() {
               onSubmit={storeTutorial}
               className="m-6 mb-4 flex flex-wrap"
             >
-              {/* <CKEditorContext context={Context}> */}
               <div className="w-7/12">
+                <label className="ml-3">کد ICD</label>
+                <Input
+                  className="mt-1em "
+                  onChange={(e) => setCode(e.target.value)}
+                  name="icd_code"
+                  size="md"
+                  // value={values.second_title}
+                  label="کد ICD"
+                />
+              </div>
+
+              {/* <CKEditorContext context={Context}> */}
+              <div className="w-7/12 mt-3">
                 <label className="ml-3">دسته بندی</label>
                 <CategoryDropdown
                   category={category}
@@ -154,7 +168,7 @@ export function CreateTutorialPage() {
                 />
               </div>
 
-              <div className="w-7/12">
+              <div className="w-7/12 mt-2">
                 <label className="ml-3">عنوان اصلی</label>
                 <Input
                   className="mt-1em "

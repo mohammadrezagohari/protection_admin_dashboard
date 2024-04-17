@@ -1,5 +1,4 @@
 import {useContext, useEffect, useRef, useState} from "react";
-
 import {
     Card, CardHeader, CardBody, Button, Typography, Input,
 } from "@material-tailwind/react";
@@ -18,6 +17,7 @@ export function ShowTutorials() {
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState(null);
 
+    const [code,setCode] = useState(null);
     const [mainTitle, setMainTitle] = useState(null);
     const [firstTitle, setFirstTitle] = useState(null);
     const [firstContext, setFirstContext] = useState(null);
@@ -63,6 +63,7 @@ export function ShowTutorials() {
             second_context: secondContext,
             main_image: image,
             category_id: category,
+            icd_code: code,
         }, id, userToken)
             .then(function (response) {
                 if (response.status) {
@@ -91,9 +92,8 @@ export function ShowTutorials() {
         return updateResult;
     };
     useEffect(() => {
-    console.log('data.data',data)
-    console.log('change')
-        setImage(data?.data?.main_image);
+        setCode(data?.data?.icd_code);
+        // setImage(data?.data?.main_image);
         setMainTitle(data?.data?.main_title);
         setFirstTitle(data?.data?.first_title);
         setFirstContext(data?.data?.first_context);
@@ -123,7 +123,8 @@ export function ShowTutorials() {
         );
     }
     return (<>
-        {loading ? (<div className="flex items-center justify-center py-60">
+        {loading ? (
+        <div className="flex items-center justify-center py-60">
             <ThreeDots
                 height="80"
                 width="80"
@@ -134,7 +135,8 @@ export function ShowTutorials() {
                 wrapperClassName=""
                 visible={true}
             />
-        </div>) : (<Card>
+        </div>) : (
+        <Card>
             <div className="py-5">
                 <Link
                     to={`/dashboard/tutorials`}
@@ -155,6 +157,17 @@ export function ShowTutorials() {
                     onSubmit={storeTutorial}
                     className="m-6 mb-4 flex flex-wrap"
                 >
+                     <div className="w-7/12">
+                        <label className="ml-3">کد ICD</label>
+                        <Input
+                            className="mt-1em "
+                            onChange={(e) => setCode(e.target.value)}
+                            name="icd_code"
+                            size="md"
+                            value={code}
+                            label="کد ICD"
+                        />
+                    </div>
                     <div className="w-7/12">
                         <label className="ml-3">دسته بندی</label>
                         <CategoryDropdown

@@ -191,7 +191,7 @@ function App() {
                         <Route path="/dashboard/hospital/create" element={<CreateHospital/>}/>
                         <Route path="/dashboard/hospital/show/:id" element={< ShowHospital/>}/>
 
-                        <Route path="/*" element={<Home/>}/>
+                        {/* <Route path="/*" element={<Home/>}/> */}
                     </Routes>
                 </Dashboard>
             </>

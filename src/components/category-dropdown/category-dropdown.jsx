@@ -19,13 +19,13 @@ const CategoryDropdown = ({category, setCategory, selected_id = null}) => {
     const fetchData = async () => {
         const result = await getCategory().then((response) => {
             setData(response?.data);
-            // console.log("response data", response?.data);
             setLoading(false);
         });
         // console.log("response result", result);
     }
     useEffect(()=>{
-        setTimeout(fetchData,3000);
+        fetchData();
+        // setTimeout(fetchData,3000);
     },[])
 
     useEffect(
@@ -33,19 +33,20 @@ const CategoryDropdown = ({category, setCategory, selected_id = null}) => {
             // console.log("response --- data", data);
             // console.log("loading --- data", loading);
             if (!loading) {
-                const collection = data;
-                const slItem = collection.find((c) => c?.id == selected_id);
-                if (slItem) {
-                    setSelected({
-                        value: slItem.id,
-                        label: slItem.name,
-                    });
-                } else {
-                    const slItem = data[0];
-                    setSelected({
-                        value: slItem.id,
-                        label: slItem.name,
-                    });
+                if (data.length>0){
+                    const slItem = data.find((c) => c?.id == selected_id);
+                    if (slItem) {
+                        setSelected({
+                            value: slItem.id,
+                            label: slItem.name,
+                        });
+                    } else {
+                        const slItem = data[0];
+                        setSelected({
+                            value: slItem.id,
+                            label: slItem.name,
+                        });
+                    }
                 }
             }
         },

@@ -57,7 +57,6 @@ export function SignIn() {
     e.preventDefault();
     const loginUser = await signIn(mobile, password)
       .then(function (response) {
-        console.log("ressssss", response);
         if (response?.status == true) {
           loginContext(response?.token);
           // localStorage.setItem("_token_admin", response?.token);

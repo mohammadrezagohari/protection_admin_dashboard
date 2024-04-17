@@ -3,11 +3,13 @@ import apiClient from "../apiClient";
 // import axios from "axios";
 
 const header = {
-    "Content-Type": "application/json", Accept: "application/json",
+    "Content-Type": "application/json",
+    Accept: "application/json",
 };
 
 const auth_header_files = {
-    "Content-Type": "multipart/form-data", Accept: "application/json",
+    "Content-Type": "multipart/form-data",
+    Accept: "application/json",
 };
 
 
@@ -26,7 +28,6 @@ export const getArticle = async (userToken) => {
 
 export const showArticle = async (id, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
-
     const response = await apiClient.get(`/article/show/${id}`, {
         headers: auth_header_files,
     });
@@ -40,12 +41,15 @@ export const showArticle = async (id, userToken) => {
 export const createArticle = async (values, userToken) => {
     auth_header_files.Authorization = `Bearer ${userToken}`;
     const {data} = await apiClient.post(`article/store`, {
-        title: values.title,
-        context: JSON.stringify(values.context),
-        category_id: values.category_id,
-        image: values.image,
+        title: values?.title,
+        context: JSON.stringify(values?.context),
+        category_id: values?.category_id,
+        image: values?.image,
     }, {
-        headers: auth_header_files,
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userToken}`,
+        },
     })
         .then((response) => {
             if (response.status !== 200) {

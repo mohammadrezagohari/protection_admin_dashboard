@@ -31,7 +31,7 @@ function Category() {
   const navigate = useNavigate();
 
   const getDatas = async () => {
-    const result = await getCategorysList(10)
+    const result = await getCategorysList(50)
       .then(function (response) {
         console.log("response", response);
         setCategories(response?.data);
